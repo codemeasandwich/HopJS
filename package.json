@@ -1,9 +1,12 @@
 {
   "name": "HopJS",
-  "private": true,
-  "version": "0.0.0",
+  "private": false,
+  "version": "0.0.1",
   "description": "Full-Stack JS",
   "keywords": ['SailsJS','BackBone','React','WebPack','BootStrap','Less'],
+  "main": "app.js",
+  "author": "Brian Shannon",
+  "license": "MIT",
   "dependencies": {
     "backbone": "^1.2.3",
     "bootstrap": "^3.3.6",
@@ -29,7 +32,7 @@
     "react": "^0.14.5",
     "react-bootstrap": "^0.28.1",
     "react-dom": "^0.14.5",
-    "sails": "~0.11.0",
+    "sails": "~0.11.3",
     "sails-disk": "~0.10.0",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.0"
@@ -38,11 +41,14 @@
     "debug": "node debug app.js",
     "start": "node app.js"
   },
-  "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/user/BayStreet.git"
+    "url": "git://github.com/codemeasandwich/HopJS"
   },
-  "author": "user",
-  "license": ""
+  "devDependencies": {
+    "grunt-browserify": "^4.0.1",
+    "grunt-react": "^0.12.3",
+    "grunt-webpack": "^1.0.11",
+    "webpack": "^1.12.2"
+  }
 }
