@@ -13,6 +13,7 @@ var ReactDom = require('react-dom');
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 var appRoutes = {
+    "*actions" : function ()   { console.log("index", arguments);    load(require('./.views/index')) },
     "user/:id" : function (id) { console.log("user/:id", arguments); load(require("./.views/user"),{id:id}) },
     "business" : function ()   { console.log("business", arguments); load(require("./.views/business"))     },
     "task"     : function ()   { console.log("task", arguments);     load(require("./.views/tasks")) },
@@ -35,7 +36,7 @@ var router2Hashs = {};
 for (var url in appRoutes){
   router2Hashs[url] = url.crc(); // e.g. "user/:id" : "a8740dec"
 }
-console.log(router2Hashs);
+console.log("router2Hashs",router2Hashs);
 
 var AppRouter = Backbone.Router.extend({
     routes:router2Hashs
