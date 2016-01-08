@@ -1,7 +1,6 @@
 "use strict"
 
 var Backbone = require('backbone');
-var $ = require('jquery');
 
 var React    = require('react');
 var ReactDom = require('react-dom');
@@ -25,7 +24,9 @@ var appRoutes = {
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 var load = function(pageElemt,loadModel) {
-    
+    console.info("pageElemt", pageElemt);
+    var route = { name: name, params: {} }
+    ReactDom.render(React.createElement(pageElemt, {route:route}), document.getElementById("content"));
 }
 
 //+++++++++++++++++++++++++++++++++++ get router hashs
@@ -33,9 +34,10 @@ var load = function(pageElemt,loadModel) {
 
 var router2Hashs = {};
 
-for (var url in appRoutes){
+//for (var url in appRoutes){
+appRoutes.forEach(function(fn,url){
   router2Hashs[url] = url.crc(); // e.g. "user/:id" : "a8740dec"
-}
+},true)
 console.log("router2Hashs",router2Hashs);
 
 var AppRouter = Backbone.Router.extend({
@@ -52,149 +54,21 @@ for (var url in appRoutes){
 }
 
 Backbone.history.start({pushState: true});
-  
-
-
-
-/*
-
-"use strict"
-define(['app','backbone','config'], function(App,Backbone,config){
-
-// Execution sequence of a React component’s lifecycle methods << Good to know ;)
-// http://javascript.tutorialhorizon.com/2014/09/13/execution-sequence-of-a-react-components-lifecycle-methods/
-
-//++++++++++++++++++++++++++++++++ Initiate the router
-//++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-var cjRoutes = {
-    "user/:id" : function (id) { load("js/views/"+deviceType+"/User",{id:id});     },
-    "event"    : function ()   { load("js/views/shared/createEvent");              },
-    "event/:id": function (id) { load("js/views/"+deviceType+"/event",{id:id, type:"event" })  },
-    "*actions" : function ()   { load("js/views/"+deviceType+"/events"); }
-}
-
-
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// !!!!!!!!!!!!!!!!!!!!!! DONT EDIT !!!!!!!!!!!!!!!!!!!!
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-var deviceType = config.local.view;
-
-var load = function(pageURI,loadModel) {
-   
-    require(['loader','js/views/shared/layout'], function(loading,layout){
-      
-      (new loading()).init();
-      
-      if (loadModel) {
-        
-        // App[loadModel.type+'s']
-        App.events.master
-         .lookup(loadModel.id)
-         .then(function(model){
-            layout(pageURI,model);
-          })
-         .catch(function(error){
-          console.error(error)
-            alert("log error to server");
-          })
-         
-      } else {
-        layout(pageURI);
-      }
-      
-    });
-}
-
-//+++++++++++++++++++++++++++++++++++ get router hashs
-//++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-var router2Hashs = {};
-
-for (var url in cjRoutes){
-  router2Hashs[url] = url.crc();
-}
-console.log(router2Hashs);
-
-  var AppRouter = Backbone.Router.extend({
-      routes:router2Hashs
-  });
-  
-//+++++++++++++++++++++++++++++++++++++ router contorl
-//++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-  return function () {
-    
-      var router = new AppRouter();
-      
-      for (var url in cjRoutes){
-        router.on('route:'+router2Hashs[url], cjRoutes[url])
-      }
-      
-      Backbone.history.start();
-  
-      return router;
-  };
-
-});
-
-
-*/
-
-
-
-
-
-
-
-
-
-
-/*
-
-var handlers = {
-  index:    require('./.views/index'),
-  user:     require('./.views/user'),
-  business: require('./.views/business'),
-  tasks:    require('./.views/tasks'),
-  notFound: require('./.views/404')
-}
-
-var Router = Backbone.Router.extend({
-  routes: {
-   '': 'index',
-   'user': 'user',
-   'business': 'business',
-   'tasks': 'tasks',
-   '*404': 'notFound'
-  }
-});
-
-var routeMangaer = new Router();
-routeMangaer.on('route', function(name, params) {
-
-  var page = handlers[name];
-  var route = { name: name, params: {} }
-          
-  if( !! params[0]){
-    route.params = parseParams(decodeURIComponent(params[0]));
-  }        
-          
-  ReactDom.render(React.createElement(page, {route:route}), document.getElementById("content"));
-})
-Backbone.history.start({pushState: true})
-
-*/
 
 //=====================================================
 //===================================== Take over links
 //=====================================================
 
+var $ = require('jquery');
+console.log($)
 // All navigation that is relative should be passed through the navigate
 // method, to be processed by the router.  If the link has a data-bypass
 // attribute, bypass the delegation completely.
 $(document).on("click", "a:not([data-bypass])", function(evt) {
+  
+  console.log("Backbone.history.navigate");
+  alert("")
+  
   // Get the anchor href and protcol
   var href = $(this).attr("href");
   var protocol = this.protocol + "//";

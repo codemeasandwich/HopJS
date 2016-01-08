@@ -9,6 +9,8 @@
  * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.bootstrap.html
  */
 
+//var startTime = new Date();
+
 var logger = require('tracer').colorConsole();
 
 console.log();
@@ -25,29 +27,32 @@ module.exports.logger = logger;
 module.exports.bootstrap = function(next) {
 
 
-  require("./languageExtensions");
+  require("./languageExtensions").init();
 
+  //  console.info('server started at ' + startTime);
 
     process.on('uncaughtException', function (err) {
-      console.error("Caught exception: ",err);
+      logger.error("Caught exception: ",err);
     });
     
     process.on('unhandledRejection', function(reason, p) {
-        console.log("Unhandled Rejection at: Promise ", p, " reason: ", reason);
+        logger.error("Unhandled Rejection at: Promise ", p, " reason: ", reason);
         // application specific logging, throwing an error, or other logic here
     });
     
     process.on('SIGINT', function () {
-      console.log('Got SIGINT.  Press Control-D to exit.');
+      logger.warn('Got SIGINT.');
     });
     
     process.on('exit', function(code) {
-      console.log('About to exit with code:', code);
+     // var endTime = new Date();
+      logger.log('About to exit with code:', code);
+     // console.info('server ended at ' + endTime);
+      
     });
 
   // It's very important to trigger this callback method when you are finished
   // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
-  
-  if (next)
+
     next();
 };
