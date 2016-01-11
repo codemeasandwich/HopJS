@@ -12,10 +12,10 @@ var ReactDom = require('react-dom');
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 var appRoutes = {
-    "*actions" : function ()   { console.log("index", arguments);    load(require('./.views/index')) },
     "user/:id" : function (id) { console.log("user/:id", arguments); load(require("./.views/user"),{id:id}) },
     "business" : function ()   { console.log("business", arguments); load(require("./.views/business"))     },
     "task"     : function ()   { console.log("task", arguments);     load(require("./.views/tasks")) },
+    "*actions" : function ()   { console.log("index", arguments);    load(require('./.views/index')) },
     "*404"     : function ()   { console.log("*404", arguments);     load(require("./.views/404"))  }
 }
 
@@ -23,7 +23,7 @@ var appRoutes = {
 // !!!!!!!!!!!!!!!!!!!!!! DONT EDIT !!!!!!!!!!!!!!!!!!!!
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-var load = function(pageElemt,loadModel) {
+function load(pageElemt,loadModel) {
     console.info("pageElemt", pageElemt);
     var route = { name: name, params: {} }
     ReactDom.render(React.createElement(pageElemt, {route:route}), document.getElementById("content"));
@@ -35,9 +35,14 @@ var load = function(pageElemt,loadModel) {
 var router2Hashs = {};
 
 //for (var url in appRoutes){
-appRoutes.forEach(function(fn,url){
+/*appRoutes.forEach(function(fn,url){
   router2Hashs[url] = url.crc(); // e.g. "user/:id" : "a8740dec"
-},true)
+},true)*/
+
+for (var url in appRoutes){
+  router2Hashs[url] = url.crc();
+}
+
 console.log("router2Hashs",router2Hashs);
 
 var AppRouter = Backbone.Router.extend({
@@ -64,10 +69,8 @@ var $ = require('jquery');
 // All navigation that is relative should be passed through the navigate
 // method, to be processed by the router.  If the link has a data-bypass
 // attribute, bypass the delegation completely.
+
 $(document).on("click", "a:not([data-bypass])", function(evt) {
-  
-  console.log("Backbone.history.navigate");
-  alert("")
   
   // Get the anchor href and protcol
   var href = $(this).attr("href");
@@ -86,5 +89,3 @@ $(document).on("click", "a:not([data-bypass])", function(evt) {
     Backbone.history.navigate(href, true);
   }
 });
-
-console.log($(document));

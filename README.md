@@ -4,7 +4,10 @@ HopJS is a Full-stack Javascript framework that unify fround and backend code. T
 
 ### This Frame work is build on
 
-[![NPM version](https://img.shields.io/badge/Sails.js-0.11.4-46AAC0.svg)]() 
-[![NPM version](https://img.shields.io/badge/Backbone-1.2.3-0071B5.svg)]() 
-[![NPM version](https://img.shields.io/badge/React.Js-0.14.6-00D8FF.svg)]() 
-[![NPM version](https://img.shields.io/badge/Webpack-1.12.9-lightgrey.svg)]()
+[![Server](https://img.shields.io/badge/Sails.js-0.11.4-46AAC0.svg)](http://sailsjs.org/) 
+[![Client](https://img.shields.io/badge/Backbone-1.2.3-0071B5.svg)](http://backbonejs.org/) 
+[![Interface](https://img.shields.io/badge/React.Js-0.14.6-00D8FF.svg)](http://facebook.github.io/react/) 
+[![Interface](https://img.shields.io/badge/BootStrap+React-0.28.1-blue.svg)](https://react-bootstrap.github.io/) 
+[![Build](https://img.shields.io/badge/Webpack-1.12.9-lightgrey.svg)](http://webpack.github.io/)
+
+Install Steps

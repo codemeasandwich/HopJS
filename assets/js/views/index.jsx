@@ -12,9 +12,11 @@ module.exports = React.createClass({
     console.log(this.props.route);
     
         return  <div>
-                  <UI.Button bsStyle="primary" href="user">Users</UI.Button> 
+                  <UI.Button bsStyle="primary" href="#">Test</UI.Button> 
+                  <UI.Button bsStyle="primary" href="user">All Users</UI.Button> 
+                  <UI.Button bsStyle="primary" href="user/42">Users 42</UI.Button> 
                   <UI.Button bsStyle="success" href="business?sdf=sdf&s4f=5">Business</UI.Button> 
-                  <UI.Button bsStyle="info"    href="tasks">Tasks</UI.Button>
+                  <UI.Button bsStyle="info"    href="task">Tasks</UI.Button>
                 </div>
     }
 })

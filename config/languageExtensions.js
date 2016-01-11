@@ -48,8 +48,10 @@ if ( ! Array.prototype.toObject) {
 * @param {Bool} all only fire callback in basic value. e.g. number, strings, bools & nasted objects
 *
 * @example var a = {'x':123}; a.forEach(function(prop,name){ alert(name+" is "+prop) })
-* 
-*/
+*
+* !!! >> " matchExpr[type].exec is not a function " BY jQuary >:( when clicking anywhere
+* !!! >> after calling " $(document).on("click", "a", function(evt) { alert(123)}) "
+*
 if ( ! Object.prototype.forEach) {
    Object.prototype.forEach = function(callback, all){
       
