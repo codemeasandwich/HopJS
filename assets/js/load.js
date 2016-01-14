@@ -1,5 +1,4 @@
 "user strict";
-console.log("$",require('jquery'));
 
  require('./bootstrap');
 

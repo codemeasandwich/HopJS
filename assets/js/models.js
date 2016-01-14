@@ -16,7 +16,9 @@ function waterLine2BackBone (Model){
     // toJSON:function(){}
   }
   //console.log("modle",Object.forEach);
-  Model.attributes.forEach(function(typeObj, name){
+ // Model.attributes.forEach(function(typeObj, name){
+ for (var name in Model.attributes){
+ var typeObj = Model.attributes[name];
     
     typeObj = ("object" == typeof typeObj) ? typeObj : { type : typeObj }
     
@@ -60,7 +62,7 @@ function waterLine2BackBone (Model){
       } 
     }
     bluePrint.defaults[name];
-  })
+  }//)
   //console.log(bluePrint);
   return Backbone.Model.extend(bluePrint);
 }

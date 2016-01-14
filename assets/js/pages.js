@@ -11,20 +11,13 @@ var ReactDom = require('react-dom');
 //++++++++++++++++++++++++++++++++ Initiate the router
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-var appRoutes = {
-    "user/:id" : function (id) { console.log("user/:id", arguments); load(require("./.views/user"),{id:id}) },
-    "business" : function ()   { console.log("business", arguments); load(require("./.views/business"))     },
-    "task"     : function ()   { console.log("task", arguments);     load(require("./.views/tasks")) },
-    "*actions" : function ()   { console.log("index", arguments);    load(require('./.views/index')) },
-    "*404"     : function ()   { console.log("*404", arguments);     load(require("./.views/404"))  }
-}
 
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // !!!!!!!!!!!!!!!!!!!!!! DONT EDIT !!!!!!!!!!!!!!!!!!!!
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 function load(pageElemt,loadModel) {
-    console.info("pageElemt", pageElemt);
+    console.info("page load", arguments);
     var route = { name: name, params: {} }
     ReactDom.render(React.createElement(pageElemt, {route:route}), document.getElementById("content"));
 }
@@ -32,31 +25,20 @@ function load(pageElemt,loadModel) {
 //+++++++++++++++++++++++++++++++++++ get router hashs
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-var router2Hashs = {};
-
-//for (var url in appRoutes){
-/*appRoutes.forEach(function(fn,url){
-  router2Hashs[url] = url.crc(); // e.g. "user/:id" : "a8740dec"
-},true)*/
-
-for (var url in appRoutes){
-  router2Hashs[url] = url.crc();
-}
-
-console.log("router2Hashs",router2Hashs);
-
 var AppRouter = Backbone.Router.extend({
-    routes:router2Hashs
+  routes:{
+      "user/:id" : load.bind(null,require("./.views/user")),
+      "business" : load.bind(null,require("./.views/business")),
+      "task"     : load.bind(null,require("./.views/tasks")),
+      "*actions" : load.bind(null,require('./.views/index')),
+      "*404"     : load.bind(null,require("./.views/404"))
+  }
 });
   
 //+++++++++++++++++++++++++++++++++++++ router contorl
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
     
 var router = new AppRouter();
-
-for (var url in appRoutes){
-  router.on('route:'+router2Hashs[url], appRoutes[url])
-}
 
 Backbone.history.start({pushState: true});
 
