@@ -56,7 +56,7 @@ grunt.config.set("webpack",{
           },
           target: 'web',
           devtool:'source-map',
-          progress: true,
+       //   progress: true,
           keepalive: true
       /*  plugins: [
         new webpack.DefinePlugin({

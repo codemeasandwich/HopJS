@@ -8,8 +8,8 @@ module.exports = function (grunt) {
 
 		'react',
 		'webpack',
-    'clean:views',
+   // 'clean:views',
 	]);
-  grunt.log.writeln('YYYYYYYYYYY');
-  console.log("ddddddd")
+  //grunt.log.writeln('YYYYYYYYYYY');
+  //console.log("ddddddd")
 };
