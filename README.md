@@ -14,8 +14,16 @@ The Client uses **Flux** built using Backbone [events](http://backbonejs.org/#Ev
 ![flux](https://facebook.github.io/flux/img/flux-simple-f8-diagram-1300w.png)
 
 ### Features
+* Client side routes with real URLs, not hash links
 * Server DB Modles are exposed as backbone model on client
 * Language Extensions available in the frontend and backend
+
+#### Todo
+* ES6 parcing
+* Minafacasion
+* Error Logging
+* Client side Lang
+*
 
 ### install
 ```

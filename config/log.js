@@ -10,7 +10,10 @@
  * http://sailsjs.org/#!/documentation/concepts/Logging
  */
 
+
 module.exports.log = {
+ // noShip : true // Hide the Sails splach screen
+
 
   /***************************************************************************
   *                                                                          *

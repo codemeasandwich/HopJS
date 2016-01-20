@@ -47,6 +47,7 @@ grunt.config.set("webpack",{
               path: path.join(__dirname,'../../.tmp/public/js/build'),
               filename: 'bundle-[name].js'
           },
+          plugins: [ new webpack.optimize.UglifyJsPlugin({ minimize: true })],
           stats: {
               // Configure the console output
               colors: true,
@@ -56,7 +57,7 @@ grunt.config.set("webpack",{
           target: 'web',
           devtool:'source-map',
           progress: true,
-          keepalive: true,
+          keepalive: true
       /*  plugins: [
         new webpack.DefinePlugin({
           'process.env': {

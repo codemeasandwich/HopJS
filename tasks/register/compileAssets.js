@@ -7,6 +7,9 @@ module.exports = function (grunt) {
 		//'coffee:dev',
 
 		'react',
-		'webpack'
+		'webpack',
+    'clean:views',
 	]);
+  grunt.log.writeln('YYYYYYYYYYY');
+  console.log("ddddddd")
 };
