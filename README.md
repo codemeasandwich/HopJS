@@ -23,7 +23,8 @@ The Client uses **Flux** built using Backbone [events](http://backbonejs.org/#Ev
 * Minafacasion
 * Error Logging
 * Client side Lang
-*
+* React Hot Loader
+* Live-Reload
 
 ### install
 ```
