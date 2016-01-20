@@ -1,5 +1,36 @@
 "use strict"
 
+//++++++++++++++++++++++++++++++++ Initiate the router
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+  var routes = {
+      "user/:id" : load.bind(null,require("./.views/user")),
+      "business" : load.bind(null,require("./.views/business")),
+      "task"     : load.bind(null,require("./.views/tasks")),
+      "*actions" : load.bind(null,require('./.views/index')),
+      "*404"     : load.bind(null,require("./.views/404"))
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!! DONT EDIT !!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 var Backbone = require('backbone');
 
 var React    = require('react');
@@ -7,14 +38,6 @@ var ReactDom = require('react-dom');
 
 // Execution sequence of a React component’s lifecycle methods << Good to know ;)
 // http://javascript.tutorialhorizon.com/2014/09/13/execution-sequence-of-a-react-components-lifecycle-methods/
-
-//++++++++++++++++++++++++++++++++ Initiate the router
-//++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// !!!!!!!!!!!!!!!!!!!!!! DONT EDIT !!!!!!!!!!!!!!!!!!!!
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 function load(pageElemt,loadModel) {
     console.info("page load", arguments);
@@ -26,13 +49,7 @@ function load(pageElemt,loadModel) {
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 var AppRouter = Backbone.Router.extend({
-  routes:{
-      "user/:id" : load.bind(null,require("./.views/user")),
-      "business" : load.bind(null,require("./.views/business")),
-      "task"     : load.bind(null,require("./.views/tasks")),
-      "*actions" : load.bind(null,require('./.views/index')),
-      "*404"     : load.bind(null,require("./.views/404"))
-  }
+  routes:routes
 });
   
 //+++++++++++++++++++++++++++++++++++++ router contorl
