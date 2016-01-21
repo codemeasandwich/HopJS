@@ -1,32 +1,14 @@
 "use strict"
 
+var settings = require("./../settings");
+
 //++++++++++++++++++++++++++++++++ Initiate the router
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
-  var routes = {
-      "user/:id" : load.bind(null,require("./.views/user")),
-      "business" : load.bind(null,require("./.views/business")),
-      "task"     : load.bind(null,require("./.views/tasks")),
-      "*actions" : load.bind(null,require('./.views/index')),
-      "*404"     : load.bind(null,require("./.views/404"))
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var App = require('./app');
-
-console.log(App);
-
+var routes = {}
+  
+for (var routeName in settings.routes){
+  routes[routeName] = load.bind(null,settings.routes[routeName]);
+}
 
 
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -44,7 +26,8 @@ var ReactDom = require('react-dom');
 function load(pageElemt,loadModel) {
     console.info("page load", arguments);
     var route = { name: name, params: {} }
-    ReactDom.render(React.createElement(pageElemt, {route:route}), document.getElementById("content"));
+    var platform = require('./../../../config/platform').platform
+    ReactDom.render(React.createElement(pageElemt, {route:route, platform:platform}), document.getElementById("content"));
 }
 
 //+++++++++++++++++++++++++++++++++++ get router hashs

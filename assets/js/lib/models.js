@@ -87,8 +87,16 @@ function waterLine2BackBone (Model){
 //============================ WaterLine Model to SHARE
 //=====================================================
 
-define('models/User',    ['../../api/models/User'],     waterLine2BackBone);
-define('models/Business',['../../api/models/Business'], waterLine2BackBone);
-define('models/Task',    ['../../api/models/Task'],     waterLine2BackBone);
+var Collections = {};
 
-module.exports = {};
+var settings = require("./../settings");
+
+var models = {}
+  
+
+for (var modelName in settings.models){
+  models[modelName] = waterLine2BackBone(settings.models[modelName])
+}
+
+module.exports = models;
+

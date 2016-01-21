@@ -14,7 +14,7 @@
 //==================================== Global Utilities
 //=====================================================
 
-    require('../../config/languageExtensions').init();
+    require('../../../config/languageExtensions').init();
     
 /**
 * internasional function

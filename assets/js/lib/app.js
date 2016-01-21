@@ -1,11 +1,20 @@
 "use strict"
 
+var config = require('./../../../config/platform').platform;
+
+
+var MODELS = require('./models');
+console.log("MODELS",MODELS);
+console.log("user",new MODELS.User());
 //=====================================================
 //===================================== Web Application
 //=====================================================
-
+ 
 var construtor = function(){
-  this.config = require('./../../config/platform').platform;
+  
+  //var users
+  
+  //this.getUsers
 }
 
 

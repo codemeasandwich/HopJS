@@ -7,7 +7,7 @@ module.exports = function(grunt){
 
 var home   = __dirname+'/../../';
 var npm    = home + 'node_modules/';
-var source = home + 'assets/js/';
+//var source = home + 'assets/js/lib/';
 
 	var config = {
 		resolve: {
@@ -41,7 +41,7 @@ grunt.config.set("webpack",{
       },*/
       dev:{
           entry: {
-              index: './assets/js/load.js'
+              index: './assets/js/lib/load.js'
           },
           output: {
               path: path.join(__dirname,'../../.tmp/public/js/build'),

@@ -3,5 +3,5 @@
 //=====================================================
 
 module.exports.platform = {
-  name:"CouchJumping",
+  name:"HopJs",
 }
