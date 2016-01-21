@@ -7,7 +7,28 @@ var settings = require("./../settings");
 var routes = {}
   
 for (var routeName in settings.routes){
-  routes[routeName] = load.bind(null,settings.routes[routeName]);
+  
+  if( ! settings.routes.hasOwnProperty(routeName)){
+    continue; // if the property is not on the routes object skip to the next one
+  }
+  
+  var routeNameS = [routeName];
+  
+  var charCount = routeName.length;
+  
+  //get the last char from routeName String
+  if (routeName[charCount -1] !== "/"
+  && undefined === routeName[routeName + "/"]) {
+    //check if a route with a '/' is definded
+    routeNameS.push(routeName + "/")
+  } else if(undefined === routeName.substr(charCount - 2)){
+    routeNameS.push(routeName.substr(charCount - 2))
+  }
+  
+  routeNameS.forEach(function(routeID){
+    routes[routeID] = load.bind(null,settings.routes[routeName])
+  })
+  
 }
 
 
