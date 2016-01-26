@@ -1,3 +1,8 @@
+
+  console.log(" +-+-+-+-+-+ ");
+  console.log(" |H|o|p|J|s| ");
+  console.log(" +-+-+-+-+-+ ");
+
 /**
  * 
  * @description React has a problem with new function beening added to the Root Objects protoype
@@ -7,15 +12,11 @@
  *
  */
 
-    require('react');
-    require('react-dom');
-
 //=====================================================
 //==================================== Global Utilities
 //=====================================================
 
     require('../../../config/languageExtensions').init();
-    
 /**
 * internasional function
 *

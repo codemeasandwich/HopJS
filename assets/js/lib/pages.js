@@ -1,14 +1,15 @@
 "use strict"
+console.info("# loading pages");
 
-var settings = require("./../settings");
+var userRoutes = require("./../settings/routes");
 
 //++++++++++++++++++++++++++++++++ Initiate the router
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 var routes = {}
   
-for (var routeName in settings.routes){
+for (var routeName in userRoutes){
   
-  if( ! settings.routes.hasOwnProperty(routeName)){
+  if( ! userRoutes.hasOwnProperty(routeName)){
     continue; // if the property is not on the routes object skip to the next one
   }
   
@@ -26,7 +27,7 @@ for (var routeName in settings.routes){
   }
   
   routeNameS.forEach(function(routeID){
-    routes[routeID] = load.bind(null,settings.routes[routeName])
+    routes[routeID] = load.bind(null,userRoutes[routeName])
   })
   
 }

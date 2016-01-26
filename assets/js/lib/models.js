@@ -1,5 +1,5 @@
 'use strict'
-
+console.info("# loading GEN models");
 var Backbone = require('backbone');
 
 //=====================================================
@@ -87,16 +87,28 @@ function waterLine2BackBone (Model){
 //============================ WaterLine Model to SHARE
 //=====================================================
 
-var Collections = {};
-
-var settings = require("./../settings");
+console.log(" NOW  READING SETTINGS INTO MODLE BUILDER ");
+var serverModels = require("./../settings/models");
 
 var models = {}
   
+for (var modelName in serverModels){
+  models[modelName] = waterLine2BackBone(serverModels[modelName])
+}
+console.log(">>models",models)
 
-for (var modelName in settings.models){
-  models[modelName] = waterLine2BackBone(settings.models[modelName])
+var collections = {};
+
+for (var modelName in models){
+  collections[modelName] =  Backbone.Collection.extend({
+    model:models[modelName],
+    url:'/'+modelName
+  });
 }
 
-module.exports = models;
+console.log(">>collections",collections)
 
+module.exports = { models:models, collections:collections};
+
+
+console.info("## loaded GEN models",module.exports);

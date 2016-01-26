@@ -15,16 +15,19 @@ The Client uses **Flux** built using Backbone [events](http://backbonejs.org/#Ev
 
 ### features
 * Client side routes with real URLs, not hash links
+ * routes will automatically trailing slashes routes for completeness
 * Server DB Modles are exposed as backbone model on client
 * Language Extensions available in the frontend and backend
-* routes will automatically trailing slashes routes for completeness
 
 #### todo
 * ES6 -> ES5 transforms
 * Error Logging
 * Client side Lang
+* testing
 * React Hot Loader
 * Live-Reload
+* Server side routes are 404ing
+* JSX not watched by Nodemon
 
 ### install
 ```
