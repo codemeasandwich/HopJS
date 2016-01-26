@@ -5,13 +5,32 @@ console.info("# loading stores");
 //===================================== Web Application
 //=====================================================
  
-var construtor = function(config, MODELS){
+var construtor = function(){
   
   //var users
   
   //this.getUsers
   
- // this.getModule
+  this.getDefaults = function(module){
+
+    if ( ! typeof module == "string") {
+      throw new Error("invalid argument supplied. module should be a string. " + typeof module + "given")
+    } else if ( ! AppData.models.hasOwnProperty(module)) {
+      throw new Error("invalid argument supplied. module '" + module + "' was not found.")
+    }
+
+    return (new AppData.models[module]()).defaults;
+  }
+  
+  this.getInputs = function(module){
+    if ( ! typeof module == "string") {
+      throw new Error("invalid argument supplied. module should be a string. " + typeof module + "given")
+    } else if ( ! AppData.attributes.hasOwnProperty(module)) {
+      throw new Error("invalid argument supplied. module '" + module + "' was not found.")
+    }
+
+    return AppData.attributes[module];
+  }
   
   this.interestedIn = function(view, modules){
     
@@ -38,6 +57,9 @@ var construtor = function(config, MODELS){
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
+  var AppData = require('./lib/models');
+  var config = require('./../../config/platform').platform;
+  
 //++++++++++++++++++++++++++++++++++++++++++ singleton
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -54,9 +76,7 @@ var construtor = function(config, MODELS){
       // summary:
       //      Gets an instance of the singleton. It is better to use 
       if(instance === null){
-         var MODELS = require('./lib/models');
-         var config = require('./../../config/platform').platform;
-         instance = new MainApp(config,MODELS);
+         instance = new MainApp();
       }
       return instance;
   };

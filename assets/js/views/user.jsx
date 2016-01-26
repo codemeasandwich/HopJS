@@ -5,7 +5,8 @@ var AutoBreadcrumbs = require('./components/AutoBreadcrumbs');
 
 var STORES   = require('./../stores');
 
-console.log("STORES user page",STORES)
+var attributes = STORES.getInputs("User");
+
 
 module.exports = React.createClass({
     displayName: 'Homepage',
@@ -29,10 +30,21 @@ module.exports = React.createClass({
     },
     
     render: function(){
+    
+        var reactInputs = [];
+        for(var att in attributes){
+          var anAtt = attributes[att];
+          reactInputs.push(<div>{att}<input type={anAtt.type} name={att}/></div>)
+        }
+    
+    
         return <div>
         
         <AutoBreadcrumbs />
         
+         <form>
+         {reactInputs  }
+          </form> 
         
         <UI.Well>Users!</UI.Well>
         

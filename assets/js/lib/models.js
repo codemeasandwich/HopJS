@@ -90,10 +90,21 @@ function waterLine2BackBone (Model){
 console.log(" NOW  READING SETTINGS INTO MODLE BUILDER ");
 var serverModels = require("./../settings/models");
 
-var models = {}
-  
+var models = {}, attributes = {}
+
 for (var modelName in serverModels){
-  models[modelName] = waterLine2BackBone(serverModels[modelName])
+  models[modelName] = waterLine2BackBone(serverModels[modelName]);
+  var ormAttributes = serverModels[modelName].attributes;
+  
+  // standardies into attribute object
+  // e.g. name:'string' -> name:{type:'string'}
+  for (var attribute in ormAttributes){
+    if (typeof ormAttributes[attribute] == "string" ) {
+      ormAttributes[attribute] = { type : ormAttributes[attribute] }
+    }
+  }
+  
+  attributes[modelName] = ormAttributes;
 }
 console.log(">>models",models)
 
@@ -108,7 +119,6 @@ for (var modelName in models){
 
 console.log(">>collections",collections)
 
-module.exports = { models:models, collections:collections};
-
+module.exports = { models:models, collections:collections, attributes:attributes};
 
 console.info("## loaded GEN models",module.exports);
