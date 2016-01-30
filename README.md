@@ -17,18 +17,11 @@ The Client uses **Flux** built using Backbone [events](http://backbonejs.org/#Ev
 ### features
 * Client side routes with real URLs, not hash links
  * routes will automatically trailing slashes routes for completeness
-* Server DB Modles are exposed as backbone model on client
+* Flux store exposes
+ * Server DB Modles as backbone model
+ * Moke model helps for attribute and form inputs
 * Language Extensions available in the frontend and backend
 
-#### todo
-* ES6 -> ES5 transforms
-* Error Logging
-* Client side Lang
-* testing
-* React Hot Loader
-* Live-Reload
-* Server side routes are 404ing
-* JSX not watched by Nodemon
 
 ### install
 ```
@@ -37,7 +30,7 @@ cd HopJS
 npm install
 ```
 
-If you dont have [nodemon](http://nodemon.io/) installed
+If you don´t have [nodemon](http://nodemon.io/) installed
 ```
 npm install -g nodemon
 ```
@@ -48,3 +41,41 @@ in HopJS directory, enter the command
 ```
 ./hop
 ```
+Now you can check out the server running on
+
+[localhost:1337](http://localhost:1337)
+
+## editing
+
+### Client
+The Client side file are in [/assets/js](https://github.com/codemeasandwich/HopJS/tree/master/assets/js)
+
+```
+.
++--assets
+| +--...
+| +--js
+|    +--...
+|    +--views
+|         JSX files
+|    +--settings
+|        +--models.js
+|        +--routes.js
+|    +--stores.js
+```
+
+### Server
+```
+.
++--api
+```
+
+#### todo
+* ES6 -> ES5 transforms
+* Error Logging
+* Client side Lang
+* testing
+* React Hot Loader
+* Live-Reload
+* Server side routes are 404ing
+* JSX not watched by Nodemon
