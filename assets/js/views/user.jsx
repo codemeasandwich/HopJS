@@ -3,10 +3,14 @@ var React = require('react');
 var UI = require('bootstrap');
 var AutoBreadcrumbs = require('./components/AutoBreadcrumbs');
 
-var STORES   = require('./../stores');
 
+console.log(" ===== user.jsx")
+
+
+var STORES = require('./../lib/stores');
+console.log("in user JSX",STORES)
 var attributes = STORES.getInputs("User");
-
+console.log(" ----- user.jsx")
 
 module.exports = React.createClass({
     displayName: 'Homepage',

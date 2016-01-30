@@ -47,7 +47,7 @@ grunt.config.set("webpack",{
               path: path.join(__dirname,'../../.tmp/public/js/build'),
               filename: 'bundle-[name].js'
           },
-          plugins: [ new webpack.optimize.UglifyJsPlugin({ minimize: true })],
+         // plugins: [ new webpack.optimize.UglifyJsPlugin({ minimize: true })],
           stats: {
               // Configure the console output
               colors: true,
