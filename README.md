@@ -1,6 +1,8 @@
 [![HopJS Logo](https://raw.githubusercontent.com/codemeasandwich/HopJS/master/hopjs.png)](http://hopjs.com)
 ## [![Server](https://img.shields.io/badge/HopJS-0.0.4-47AD9E.svg)](https://github.com/codemeasandwich/HopJS) 
 
+[![Join the chat at https://gitter.im/codemeasandwich/HopJS](https://badges.gitter.im/codemeasandwich/HopJS.svg)](https://gitter.im/codemeasandwich/HopJS?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Hop.js is a Full-stack Javascript framework that unify fround and backend code. The aim is to share; views, modles and controlle login for maximum code reuse.
 
 ### This Frame work is build on
