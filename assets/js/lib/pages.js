@@ -1,11 +1,11 @@
 "use strict"
-console.info("# loading pages");
+//console.info("# loading pages");
 
 var userRoutes = require("./../settings/routes");
 
 //++++++++++++++++++++++++++++++++ Initiate the router
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
-var routes = {}
+var routes = { }
   
 for (var routeName in userRoutes){
   
@@ -27,29 +27,28 @@ for (var routeName in userRoutes){
   }
   
   routeNameS.forEach(function(routeID){
-    routes[routeID] = load.bind(null,userRoutes[routeName])
+    routes[routeID] = load.bind( null, userRoutes[routeName] )
   })
-  
 }
-
-
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// !!!!!!!!!!!!!!!!!!!!!! DONT EDIT !!!!!!!!!!!!!!!!!!!!
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 var Backbone = require('backbone');
 
 var React    = require('react');
 var ReactDom = require('react-dom');
 
+// var STORES = require('./stores');
+
+// var lastPageArgs;
+
 // Execution sequence of a React component’s lifecycle methods << Good to know ;)
 // http://javascript.tutorialhorizon.com/2014/09/13/execution-sequence-of-a-react-components-lifecycle-methods/
 
 function load(pageElemt,loadModel) {
-    console.info("page load", arguments);
+   // lastPageArgs = arguments;
+  //  console.info("page load", arguments);
     var route = { name: name, params: {} }
     var platform = require('./../../../config/platform').platform
-    ReactDom.render(React.createElement(pageElemt, {route:route, platform:platform}), document.getElementById("content"));
+    ReactDom.render(React.createElement( pageElemt, { route : route, platform : platform }), document.getElementById("content"));
 }
 
 //+++++++++++++++++++++++++++++++++++ get router hashs

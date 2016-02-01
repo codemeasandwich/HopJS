@@ -11,13 +11,23 @@ module.exports = {
 
   attributes: {
     
-    firstName: 'String',
+    firstName: {
+        type: 'String',
+        required: true,
+        maxLength: 40,
+        minLength: 4,
+      },
     lastName: 'String',
     email: {
         type: 'email',
         required: true,
         unique: true
-      }
+      },
+    age: {
+      type: 'integer',
+      min: 18
+    },
+    city:"string"
   
   }
 };

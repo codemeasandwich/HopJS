@@ -1,5 +1,5 @@
 'use strict'
-console.info("# loading settings/models");
+//console.info("# loading settings/models");
 
 module.exports = {
 
@@ -7,4 +7,4 @@ module.exports = {
       Business:require('../../../api/models/Business')
 
 }
-console.info("## loaded settings/models",module.exports);
+//console.info("## loaded settings/models",module.exports);
