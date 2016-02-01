@@ -1,5 +1,5 @@
 "user strict";
-console.info("# loading LOAD")
+//console.info("# loading LOAD")
  require('./bootstrap');
  
 //=====================================================

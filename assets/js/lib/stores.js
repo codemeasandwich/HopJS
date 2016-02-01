@@ -5,30 +5,38 @@
 // !!!!!!!!!!!!!!!!!!!!!! DONT EDIT !!!!!!!!!!!!!!!!!!!!
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-console.info("# loading stores");
+//console.info("# loading stores");
 
 //=====================================================
 //===================================== Web Application
 //=====================================================
-console.log(" ===== stores.js")
-var construtor = require("./../app");
-console.log(" XXX app = ",construtor)
+
+var userApp = require("./../app");
 
 
-
-  var AppData = require('./models');
-  var config = require('./../../../config/platform').platform;
+var Backbone = require('backbone');
+var AppData = require('./models');
+//userApp.prototype.AppData = AppData;
+//userApp.prototype.config = require('./../../../config/platform').platform;
   
+var callBacks = [];
+
 //++++++++++++++++++++++++++++++++++++++++++ singleton
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
   var instance = null;
+/*
+  var stores = Backbone.Model.extend({
+    initialize: function(){
+        alert("Welcome to this world");
+    },
+    dispatcher : userApp.reciver
+  });*/
 
   function MainApp(){
       if(instance !== null){
           throw new Error("Cannot instantiate more than one MainApp, use MainApp.getInstance()");
       }
-      console.log("MainApp initialize",this.initialize);
       this.initialize();
   }
   
@@ -42,10 +50,27 @@ console.log(" XXX app = ",construtor)
   };
   
   MainApp.prototype = {
-      initialize: construtor.bind(this),
-      
+      initialize: function(){
+
+      if(userApp.init)  
+         userApp.init();
+
+      this.ACTIONS    = require('./../settings/actions');
+      this.MODEL      = genStoreNames(AppData.models);
+      this.NAME       = genStoreNames(userApp.userStores);
+      this.Dispatcher = userApp.reciver.bind(userApp);
+
+      this.checkModelInput = AppData.checkModelInput;
+
+      this.getData = function(modelName,where){
+
+        if(where)
+          return userApp.userStores[modelName].search(where).toJSON()
+
+        return userApp.userStores[modelName].toJSON()
+      };
             
-      getDefaults : function(module){
+      this.getModelDefaults = function(module){
       
         if ( ! typeof module == "string") {
           throw new Error("invalid argument supplied. module should be a string. " + typeof module + "given")
@@ -54,9 +79,9 @@ console.log(" XXX app = ",construtor)
         }
       
         return (new AppData.models[module]()).defaults;
-      },
+      };
       
-      getInputs : function(module){
+      this.getModelInputs = function(module){
         if ( ! typeof module == "string") {
           throw new Error("invalid argument supplied. module should be a string. " + typeof module + "given")
         } else if ( ! AppData.attributes.hasOwnProperty(module)) {
@@ -64,9 +89,22 @@ console.log(" XXX app = ",construtor)
         }
       
         return AppData.attributes[module];
-      },
+      };
+/*
+      this.onEmit = function(callBack){
+        callBacks.push(callBack);
+      }
+
+      this.removeEmit = function(callBack){
+        callBacks = callBacks.filter(function(cb){
+          return ! callBack === cb
+        })
+      }
       
-      interestedIn : function(view, modules){
+
+      ,
+      
+      this.interestedIn = function(view, modules){
         
         if (typeof modules == "string") {
           modules = [modules];
@@ -79,13 +117,30 @@ console.log(" XXX app = ",construtor)
         }
         
         console.log("interestedIn",arguments)
+        modules.forEach(function(moduleName){
+          stores.on(moduleName,view.fluxChange)
+        })
+        
       },
-      disinterestedIn : function(view, modules){
+      this.disinterestedIn = function(view, modules){
         console.log("disinterestedIn",arguments)
-      }
+      }*/
+    }
   }
 
 module.exports = MainApp.getInstance();
-console.info("MainApp.getInstance()",MainApp.getInstance());
-console.info("## loaded stores",module.exports);
-console.log(" ----- stores.js")
+
+//=====================================================
+//=============================== Lib: Helper functions
+//=====================================================
+
+function genStoreNames(stores){
+  //console.log("genStoreNames",stores)
+
+  return Object.keys(stores)
+      .reduce(function(previousValue, currentValue){ 
+       // console.log(currentValue.toUpperCase(),previousValue);
+        previousValue[currentValue.toUpperCase()] = currentValue;
+        return previousValue;
+      },{});
+}

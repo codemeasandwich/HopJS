@@ -1,5 +1,5 @@
 'use strict'
-console.info("# loading settings/routes");
+//console.info("# loading settings/routes");
 
 module.exports = { // this will pull page.. but pages need store
       "user"     : require("./../.views/user"),
@@ -9,4 +9,4 @@ module.exports = { // this will pull page.. but pages need store
       "*actions" : require('./../.views/index'),
       "*404"     : require("./../.views/404")
 }
-console.info("## loaded settings/routes",module.exports);
+//console.info("## loaded settings/routes",module.exports);
