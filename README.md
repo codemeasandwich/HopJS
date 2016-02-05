@@ -2,6 +2,8 @@
 
 [![Server](https://img.shields.io/badge/HopJS-0.0.5-47AD9E.svg)](https://github.com/codemeasandwich/HopJS)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
+[![build](https://api.travis-ci.org/codemeasandwich/HopJS.svg)](https://travis-ci.org/codemeasandwich/HopJS)
+[![dependencies](https://david-dm.org/codemeasandwich/HopJS.svg)](https://github.com/codemeasandwich/HopJS/blob/master/package.json)
 
 [![Gitter chat](https://img.shields.io/badge/gitter-chat-brightgreen.svg)](https://gitter.im/codemeasandwich/HopJS)
 
