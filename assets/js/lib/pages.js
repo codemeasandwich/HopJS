@@ -36,13 +36,42 @@ var Backbone = require('backbone');
 var React    = require('react');
 var ReactDom = require('react-dom');
 
-// var STORES = require('./stores');
+ var STORES = require('./stores');
 
 // var lastPageArgs;
 
 // Execution sequence of a React component’s lifecycle methods << Good to know ;)
 // http://javascript.tutorialhorizon.com/2014/09/13/execution-sequence-of-a-react-components-lifecycle-methods/
 
+var Content = React.createClass({
+    displayName: 'Body Content',
+    getInitialState : function(){
+      return { count : 0 }  
+    },
+    reload : function(){
+      console.log("RELOAD");
+      this.setState({ count : this.state.count + 1});
+    },
+    componentDidMount : function(){
+      STORES.onEmit(this.reload)
+    },
+    componentWillUnmount : function(){
+      STORES.removeEmit(this.reload)
+    },
+    render: function(){
+        return React.createElement( this.props.page, React.__spread({},  this.props))
+    }
+})
+
+function load(pageElemt,loadModel) {
+   // lastPageArgs = arguments;
+  //  console.info("page load", arguments);
+    var route = { name : name, params : {} }
+    var platform = require('./../../../config/platform').platform
+    ReactDom.render(React.createElement( Content, { page : pageElemt, route : route, platform : platform }), document.getElementById("content"));
+}
+
+/*
 function load(pageElemt,loadModel) {
    // lastPageArgs = arguments;
   //  console.info("page load", arguments);
@@ -50,7 +79,7 @@ function load(pageElemt,loadModel) {
     var platform = require('./../../../config/platform').platform
     ReactDom.render(React.createElement( pageElemt, { route : route, platform : platform }), document.getElementById("content"));
 }
-
+*/
 //+++++++++++++++++++++++++++++++++++ get router hashs
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 

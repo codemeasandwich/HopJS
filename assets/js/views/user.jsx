@@ -83,6 +83,7 @@ module.exports = React.createClass({
     render: function(){
         
         return <div>
+                  <span {...this.props}/>
                   <UI.Well> Users! </UI.Well>
                   <AutoBreadcrumbs />
                   <AddUserForm/>

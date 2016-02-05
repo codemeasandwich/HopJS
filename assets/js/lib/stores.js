@@ -7,19 +7,27 @@
 
 //console.info("# loading stores");
 
+var callBacks = [];
+
+var emit = function(){
+  console.log("prototype.emit")
+  callBacks.forEach(function(cb){
+     cb();
+   })
+}
+  
 //=====================================================
 //===================================== Web Application
 //=====================================================
 
-var userApp = require("./../app");
-
+var App = require("./../app");
+var userApp = new App(emit);
 
 var Backbone = require('backbone');
 var AppData = require('./models');
 //userApp.prototype.AppData = AppData;
 //userApp.prototype.config = require('./../../../config/platform').platform;
   
-var callBacks = [];
 
 //++++++++++++++++++++++++++++++++++++++++++ singleton
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -39,7 +47,10 @@ var callBacks = [];
       }
       this.initialize();
   }
-  
+  console.log(AppData);
+  console.log(AppData.prototype)
+
+  console.log(AppData);
   MainApp.getInstance = function(){
       // summary:
       //      Gets an instance of the singleton. It is better to use 
@@ -51,9 +62,6 @@ var callBacks = [];
   
   MainApp.prototype = {
       initialize: function(){
-
-      if(userApp.init)  
-         userApp.init();
 
       this.ACTIONS    = require('./../settings/actions');
       this.MODEL      = genStoreNames(AppData.models);
@@ -90,20 +98,20 @@ var callBacks = [];
       
         return AppData.attributes[module];
       };
-/*
+
       this.onEmit = function(callBack){
         callBacks.push(callBack);
-      }
+         //return bool
+      };
 
-      this.removeEmit = function(callBack){
+      this.remove = function(callBack){
+       
         callBacks = callBacks.filter(function(cb){
           return ! callBack === cb
         })
-      }
-      
-
-      ,
-      
+         //return bool
+      };
+      /*
       this.interestedIn = function(view, modules){
         
         if (typeof modules == "string") {

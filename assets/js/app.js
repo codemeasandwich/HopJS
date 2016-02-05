@@ -13,15 +13,14 @@ var myStores = {
 	users : new AppData.collections.User()
 }
 
-module.exports = {
-  init : function(){
+module.exports = function(emit){
 
-  },
+  console.log("in App with emit of",emit)
 
-  userStores : myStores,
+  this.userStores = myStores,
   
-  reciver : function(actionName,data){
-
+  this.reciver = function(actionName,data){
+  
 	return new Promise(function(resolve, reject) {
 	  // do a thing, possibly async, then…
 	  try{
@@ -37,6 +36,8 @@ module.exports = {
 			   myStores.users.add(data)
 			   console.log("Number of users:",myStores.users.length)
 	           resolve(true);
+             console.log("this.emit",this)
+             emit();
 	          break;
 	        default:
 	        	resolve(false);
