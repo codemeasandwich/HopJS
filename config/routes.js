@@ -31,11 +31,13 @@ module.exports.routes = {
   * `assets` directory)                                                      *
   *                                                                          *
   ***************************************************************************/
-
-  '/': {
-    view: 'homepage'
-  }
-
+  
+  '/*' : {
+    controller: 'MainController',
+    skipAssets: true
+  },
+  '/api/:model' : 'ApiController'
+  
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
