@@ -30,11 +30,11 @@ The Client uses **Flux** built using Backbone [events](http://backbonejs.org/#Ev
 ## editing
 
 **That are 4 areas when editing**
-1) Application logic [/assets/js/app.js](https://github.com/codemeasandwich/HopJS/tree/master/assets/js/app.js)
-2) User interface [/assets/js/views/...](https://github.com/codemeasandwich/HopJS/tree/master/assets/js/views)
-2) Storage logic [/api/models/...](https://github.com/codemeasandwich/HopJS/tree/master/api/models)
-3) Application config [/config/platform.js](https://github.com/codemeasandwich/HopJS/tree/master/config/platform.js)
 
+1. Application logic [/assets/js/app.js](https://github.com/codemeasandwich/HopJS/tree/master/assets/js/app.js)
+2. User interface [/assets/js/views/...](https://github.com/codemeasandwich/HopJS/tree/master/assets/js/views)
+3. Storage logic [/api/models/...](https://github.com/codemeasandwich/HopJS/tree/master/api/models)
+4. Application config [/config/platform.js](https://github.com/codemeasandwich/HopJS/tree/master/config/platform.js)
 
 ### install
 ```
