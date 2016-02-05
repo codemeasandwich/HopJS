@@ -3,7 +3,6 @@
 [![Server](https://img.shields.io/badge/HopJS-0.0.5-47AD9E.svg)](https://github.com/codemeasandwich/HopJS)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
 [![build](https://api.travis-ci.org/codemeasandwich/HopJS.svg)](https://travis-ci.org/codemeasandwich/HopJS)
-[![dependencies](https://david-dm.org/codemeasandwich/HopJS.svg)](https://github.com/codemeasandwich/HopJS/blob/master/package.json)
 
 [![Gitter chat](https://img.shields.io/badge/gitter-chat-brightgreen.svg)](https://gitter.im/codemeasandwich/HopJS)
 
@@ -22,11 +21,19 @@ The Client uses **Flux** built using Backbone [events](http://backbonejs.org/#Ev
 
 ### features
 * Client side routes with real URLs, not hash links
- * routes will automatically trailing slashes routes for completeness
+  * routes will automatically trailing slashes routes for completeness
 * Flux store exposes
- * Server DB Modles as backbone model
- * Moke model helps for attribute and form inputs
+  * Server DB Modles as backbone model
+  * Moke model helps for attribute and form inputs
 * Language Extensions available in the frontend and backend
+
+## editing
+
+**That are 4 areas when editing**
+1) Application logic [/assets/js/app.js](https://github.com/codemeasandwich/HopJS/tree/master/assets/js/app.js)
+2) User interface [/assets/js/views/...](https://github.com/codemeasandwich/HopJS/tree/master/assets/js/views)
+2) Storage logic [/api/models/...](https://github.com/codemeasandwich/HopJS/tree/master/api/models)
+3) Application config [/config/platform.js](https://github.com/codemeasandwich/HopJS/tree/master/config/platform.js)
 
 
 ### install
@@ -51,31 +58,6 @@ Now you can check out the server running on
 
 [localhost:1337](http://localhost:1337)
 
-## editing
-
-### Client
-The Client side file are in [/assets/js](https://github.com/codemeasandwich/HopJS/tree/master/assets/js)
-
-```
-.
-+--assets
-| +--...
-| +--js
-|    +--...
-|    +--views
-|         JSX files
-|    +--settings
-|        +--models.js
-|        +--routes.js
-|    +--stores.js
-```
-
-### Server
-```
-.
-+--api
-```
-
 #### todo
 * ES6 -> ES5 transforms
 * Error Logging
@@ -83,5 +65,4 @@ The Client side file are in [/assets/js](https://github.com/codemeasandwich/HopJ
 * testing
 * React Hot Loader
 * Live-Reload
-* Server side routes are 404ing
 * JSX not watched by Nodemon
