@@ -16,7 +16,7 @@ Hop.js is a Full-stack Javascript framework that unify fround and backend code. 
 [![UI](https://img.shields.io/badge/BootStrap+React-0.28.1-blue.svg)](https://react-bootstrap.github.io/) 
 [![Build](https://img.shields.io/badge/Webpack-1.12.9-lightgrey.svg)](http://webpack.github.io/)
 
-The Client uses **Flux** built using Backbone [events](http://backbonejs.org/#Events). A simple implementation example can be found [here](https://jsfiddle.net/codemeasandwich/bsj8onr8/).
+The Client uses **Flux** built using Backbone [events](http://backbonejs.org/#Events). A simple implementation example can be found [here](http://jsfiddle.net/codemeasandwich/bsj8onr8/).
 ![flux](https://facebook.github.io/flux/img/flux-simple-f8-diagram-1300w.png)
 
 ### features

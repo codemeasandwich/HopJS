@@ -47,7 +47,8 @@
   },
   "scripts": {
     "debug": "node debug app.js",
-    "start": "node app.js"
+    "start": "node app.js",
+	"test"   : "mocha tests/index.js"
   },
   "repository": {
     "type": "git",

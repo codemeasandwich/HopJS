@@ -46,11 +46,11 @@ var AppData = require('./models');
           throw new Error("Cannot instantiate more than one MainApp, use MainApp.getInstance()");
       }
       this.initialize();
-  }
+  }/*
   console.log(AppData);
   console.log(AppData.prototype)
 
-  console.log(AppData);
+  console.log(AppData);*/
   MainApp.getInstance = function(){
       // summary:
       //      Gets an instance of the singleton. It is better to use 
