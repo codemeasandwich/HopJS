@@ -48,16 +48,18 @@
   "scripts": {
     "debug": "node debug app.js",
     "start": "node app.js",
-	"test"   : "mocha tests/index.js"
+    "test": "mocha tests/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/codemeasandwich/HopJS"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
     "grunt-browserify": "^4.0.1",
     "grunt-react": "^0.12.3",
     "grunt-webpack": "^1.0.11",
+    "mocha": "^2.4.5",
     "webpack": "^1.12.2"
   }
 }
