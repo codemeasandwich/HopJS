@@ -3,8 +3,7 @@
 [![Server](https://img.shields.io/badge/HopJS-0.0.5-47AD9E.svg)](https://github.com/codemeasandwich/HopJS)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
 [![build](https://api.travis-ci.org/codemeasandwich/HopJS.svg)](https://travis-ci.org/codemeasandwich/HopJS)
-
-[![Gitter chat](https://img.shields.io/badge/gitter-chat-brightgreen.svg)](https://gitter.im/codemeasandwich/HopJS)
+[![Coverage Status](https://coveralls.io/repos/codemeasandwich/HopJS/badge.svg?branch=master&service=github)](https://coveralls.io/github/codemeasandwich/HopJS?branch=master)
 
 Hop.js is a Full-stack Javascript framework that unify fround and backend code. The aim is to share; views, modles and controlle login for maximum code reuse.
 
@@ -59,10 +58,14 @@ Now you can check out the server running on
 [localhost:1337](http://localhost:1337)
 
 #### todo
-* ES6 -> ES5 transforms
+* ES6 -> ES5/4 transforms
 * Error Logging
 * Client side Lang
-* testing
 * React Hot Loader
 * Live-Reload
 * JSX not watched by Nodemon
+* set code style
+
+#### random commands
+* npm test
+* istanbul cover node_modules/mocha/bin/_mocha -- -R spec tests/index
