@@ -3,6 +3,9 @@
 var logger = require('tracer').colorConsole();
 
 module.exports = function(req, res, next) {
-  console.info(req.path);
+  
+  var socket = (req.socket)?"*":"";
+  
+  console.info(req.method + socket + ": " + req.path + " ~ "+req.acceptedLanguages);
   next();
 }

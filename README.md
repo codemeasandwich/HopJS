@@ -37,7 +37,7 @@ The Client uses **Flux** built using Backbone [events](http://backbonejs.org/#Ev
 
 ### install
 ```
-git clone https://github.com/codemeasandwich/HopJS.git HopJS
+git clone https://github.com/codemeasandwich/HopJS.git
 cd HopJS
 npm install
 ```

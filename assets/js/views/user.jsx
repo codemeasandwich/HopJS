@@ -3,14 +3,12 @@ var React = require('react');//, ReactDOM = require('react-dom');
 var UI = require('bootstrap');
 var AutoBreadcrumbs = require('./components/AutoBreadcrumbs');
 
-
 //console.log(" ===== user.jsx")
 
 
-var STORES = require('./../lib/stores');
-//console.log("in user JSX",STORES)
+var STORES = require('./../lib/storesHelper');
+
 var attributes = STORES.getModelInputs(STORES.MODEL.USER);
-//console.log(" ----- user.jsx")
 
 
 
@@ -23,8 +21,7 @@ var AddUserForm = React.createClass({
     },
 
     addNewUser : function() {
-      STORES
-      .Dispatcher(STORES.ACTIONS.ADD.USER, this.state.input)
+      this.props.Fire(this.props.ACTION_ADD, this.state.input)
       .then(function(wasHandled){
         console.info("Dispatcher call finished",wasHandled)
       })
@@ -55,6 +52,7 @@ var AddUserForm = React.createClass({
     render: function(){
         
         var isOk  = STORES.checkModelInput(STORES.MODEL.USER,this.state.input);
+        //console.log("isOk",isOk)
         return  <form>
                     { this.getForm(attributes)  }
                     <UI.Button bsStyle="success" disabled={ !! isOk} onClick={this.addNewUser}>Add</UI.Button>
@@ -65,7 +63,7 @@ var AddUserForm = React.createClass({
 var ListUsers = React.createClass({
 
     render: function(){
-        var users = STORES.getData(STORES.NAME.USERS)
+        var users = [];//STORES.getData(STORES.MODEL.USER);
 
         return <UI.ButtonGroup vertical>
                    {
@@ -86,7 +84,7 @@ module.exports = React.createClass({
                   <span {...this.props}/>
                   <UI.Well> Users! </UI.Well>
                   <AutoBreadcrumbs />
-                  <AddUserForm/>
+                  <AddUserForm ACTION_ADD={this.props.Emit.ACTIONS.ADD.USER} Fire={this.props.Emit.Fire}/>
                   <ListUsers/>
                 </div>
     }

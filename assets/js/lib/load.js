@@ -1,14 +1,45 @@
 "user strict";
-//console.info("# loading LOAD")
+//=====================================================
+//=============== >> The enrty point << ===============
+//=====================> webpack <=====================
+
  require('./bootstrap');
  
 //=====================================================
-//================================= Setup webpack stuff
+//======================================= Setup the app
 //=====================================================
 
+//++++++++++++++++++++++++++++++++++ initialise stores
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*
+var AppData = require('./lib/models');
 
-//=====================================================
-//============================================== Router
-//=====================================================
+var modelNames = Object.keys(AppData.collections);
 
- require('./pages');
+var stores = modelNames.reduce(function(data,name){
+  data[name] = new AppData.collections[name]();
+  return data;
+},{});
+*/
+//+++++++++++++++++++++++++++++ dispatcher / app logic
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+var AppData = require('./models');
+var AppDB = {}
+
+for (var collectionName in AppData.collections) {
+  AppDB[collectionName] = new AppData.collections[collectionName]();
+}
+
+var Dispatcher = require('./dispatcher');
+
+var dispatcher = new Dispatcher(AppData);
+
+
+//++++++++++++++++++++++++++++++++ UI / pages / rouths
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+ var pages = require('./pages')(AppData, dispatcher);
+
+ 

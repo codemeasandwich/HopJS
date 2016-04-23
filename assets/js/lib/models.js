@@ -3,9 +3,9 @@
 var Backbone = require('backbone');
 
 var modelsGenerator = require('./modelsGenerator');
-var serverModels = require("./../settings/models");
+var serverModels    = require("./../wiring/models");
 
-module.exports = modelsGenerator(serverModels)
+module.exports = modelsGenerator(serverModels);
 
 //=====================================================
 //=============================== Backbone Model update

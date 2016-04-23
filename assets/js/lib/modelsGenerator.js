@@ -14,17 +14,18 @@ var attributes = {};
 
 function checkModelInput(moduleName,incomingModuleData){
 
+//console.log(moduleName, arguments);
+
   if( ! moduleName){
     throw new Error("moduleName was set to " + moduleName);
   } else if( ! attributes[moduleName]){
     throw new Error("No module with the name " + moduleName + "was found");
-  }
-
-  //console.log("checkModelInput",arguments);
+  }  
+  
   var targetAttributes = attributes[moduleName];
   for(var targetAtt in targetAttributes){
     var aTargetAtt = targetAttributes[targetAtt];
-    
+  
     // skip if there no settings
     if(typeof aTargetAtt == "string"){
       continue;
