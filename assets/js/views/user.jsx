@@ -52,7 +52,6 @@ var AddUserForm = React.createClass({
     render: function(){
         
         var isOk  = STORES.checkModelInput(STORES.MODEL.USER,this.state.input);
-        //console.log("isOk",isOk)
         return  <form>
                     { this.getForm(attributes)  }
                     <UI.Button bsStyle="success" disabled={ !! isOk} onClick={this.addNewUser}>Add</UI.Button>
@@ -63,11 +62,11 @@ var AddUserForm = React.createClass({
 var ListUsers = React.createClass({
 
     render: function(){
-        var users = [];//STORES.getData(STORES.MODEL.USER);
+        //var users = [];//STORES.getData(STORES.MODEL.USER);
 
         return <UI.ButtonGroup vertical>
                    {
-                    users.map(function(user){
+                    this.props.users.map(function(user){
                       return <UI.Button key={user.firstName}>{user.firstName}</UI.Button>
                     })
                    }
@@ -80,12 +79,13 @@ module.exports = React.createClass({
 
     render: function(){
         
+        console.log("isOk",this.props);
         return <div>
                   <span {...this.props}/>
                   <UI.Well> Users! </UI.Well>
                   <AutoBreadcrumbs />
                   <AddUserForm ACTION_ADD={this.props.Emit.ACTIONS.ADD.USER} Fire={this.props.Emit.Fire}/>
-                  <ListUsers/>
+                  <ListUsers users={this.props.AppDB.User}/>
                 </div>
     }
 })

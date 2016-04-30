@@ -6,7 +6,7 @@
 var callBacks = [];
 
 var dispatcher = function(AppDB){
-  
+  console.log(" -- AppDB",AppDB);
 //++++++++++++++++++++++++++++ load modules from logic
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -39,7 +39,7 @@ var dispatcher = function(AppDB){
 
   this.fire = function(actionName,data,explicit){
     
-    var stats = {explicit:0, general:0, skipped:0}
+    var statistics = {explicit:0, general:0, skipped:0};
     
     if ("undefined" === typeof actionName) {
       throw new Error("actionName is undefined");
@@ -64,15 +64,15 @@ var dispatcher = function(AppDB){
       
       if (todo) {
         workers.push(todo);
-        stats[halderTypeName]++;
+        statistics[halderTypeName]++;
       } else {
-        stats.skipped++;
+        statistics.skipped++;
       }
       
       return workers;
     },[]);
     
-    console.info(actionName+" is being handled by ",stats);
+    console.info(actionName+" is being handled by ",statistics);
     
     return Promise.all(workToDo);
     

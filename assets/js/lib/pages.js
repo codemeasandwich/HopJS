@@ -3,7 +3,9 @@
 var userRoutes = require("./../wiring/routes");
 var Actions    = require('./../wiring/actions');
 
-module.exports = function(AppData, dispatcher){
+module.exports = function(AppData,AppDB, dispatcher){
+      
+console.log(" KX AppData",AppData);
       
 //++++++++++++++++++++++++++++++++ Initiate the router
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -48,28 +50,56 @@ module.exports = function(AppData, dispatcher){
     var Content = React.createClass({
         displayName: 'Body Content',
         getInitialState : function(){
+          console.log('Body Content',"getInitialState");
+          AppData.bind(this.reload);
           return { count : 0 }  
         },
-        reload : function(){
-          console.log("RELOAD");
+        reload : function(type, data, changes){
+          console.log("RELOAD",arguments);
+          //console.log(JSON.stringify(arguments));
+          
           this.setState({ count : this.state.count++ });
         },
         componentDidMount : function(){
           //TODO: on Backbone colltion change.. reload view
+          console.log('Body Content',"componentDidMount");
+          AppData.bind(this.reload);
           // dispatcher.fire(this.reload)
         },
         componentWillUnmount : function(){
+          AppData.unbind(this.reload);
          // dispatcher.remove(this.reload)
         },
         render: function(){
-            return React.createElement( this.props.page, React.__spread({},  this.props))
+          
+            var AppDBJson = Object.keys(AppDB).reduce(function(pojo, collectionName){
+                  pojo[collectionName] = AppDB[collectionName].toJSON();
+                  return pojo;
+              },{})
+          
+            return React.createElement( this.props.page, React.__spread({AppDB:AppDBJson}, this.props))
         }
     })
     
     function load(pageElemt,loadModel) {
-        var route = { name : name, params : {} }
-        var platform = require('./../../../config/platform').platform
-        ReactDom.render(React.createElement( Content, { page : pageElemt, route : route, platform : platform, Emit : {ACTIONS : Actions, Fire : dispatcher.fire}}), document.getElementById("content"));
+        
+        console.log("LOAD",pageElemt);
+        
+        var route = { name : name, params : {} };
+        var platform = require('./../../../config/platform').platform;
+        
+        var props = {
+          page : pageElemt,
+          route : route,
+          platform : platform,
+          
+          Emit : {
+            ACTIONS : Actions,
+            Fire : dispatcher.fire
+          }
+        };
+        
+        ReactDom.render(React.createElement(Content, props),document.getElementById("content"));
     }
     
     
@@ -116,7 +146,5 @@ module.exports = function(AppData, dispatcher){
         Backbone.history.navigate(href, true);
       }
     });
-    
-
 
 }
