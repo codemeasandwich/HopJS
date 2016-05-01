@@ -1,6 +1,7 @@
 [![HopJS Logo](https://raw.githubusercontent.com/codemeasandwich/HopJS/master/hopjs.png)](http://hopjs.com)
 
-[![Server](https://img.shields.io/badge/HopJS-0.1.0-47AD9E.svg)](https://github.com/codemeasandwich/HopJS)
+[![GitHub version](https://badge.fury.io/gh/codemeasandwich%2FHopJS.svg)](https://badge.fury.io/gh/codemeasandwich%2FHopJS)
+[![Version](https://img.shields.io/badge/HopJS-0.1.0-47AD9E.svg)](https://github.com/codemeasandwich/HopJS)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
 [![build](https://api.travis-ci.org/codemeasandwich/HopJS.svg)](https://travis-ci.org/codemeasandwich/HopJS)
 [![Coverage Status](https://coveralls.io/repos/github/codemeasandwich/HopJS/badge.svg?branch=master)](https://coveralls.io/github/codemeasandwich/HopJS?branch=master)
