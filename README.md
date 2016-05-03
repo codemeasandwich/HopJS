@@ -1,7 +1,7 @@
 [![HopJS Logo](https://raw.githubusercontent.com/codemeasandwich/HopJS/master/hopjs.png)](http://hopjs.com)
 
 [![GitHub version](https://badge.fury.io/gh/codemeasandwich%2FHopJS.svg)](https://badge.fury.io/gh/codemeasandwich%2FHopJS)
-[![Version](https://img.shields.io/badge/HopJS-0.1.0-47AD9E.svg)](https://github.com/codemeasandwich/HopJS)
+[![Version](https://img.shields.io/badge/HopJS-0.2.0-47AD9E.svg)](https://github.com/codemeasandwich/HopJS)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
 [![build](https://api.travis-ci.org/codemeasandwich/HopJS.svg)](https://travis-ci.org/codemeasandwich/HopJS)
 [![Coverage Status](https://coveralls.io/repos/github/codemeasandwich/HopJS/badge.svg?branch=master)](https://coveralls.io/github/codemeasandwich/HopJS?branch=master)
@@ -10,10 +10,10 @@ Hop.js is a Full-stack Javascript framework that unify fround and backend code. 
 
 ### This Frame work is build on
 
-[![Server](https://img.shields.io/badge/Sails.js-0.11.4-46AAC0.svg)](http://sailsjs.org/) 
-[![Client](https://img.shields.io/badge/Backbone-1.2.3-0071B5.svg)](http://backbonejs.org/) 
+[![Server](https://img.shields.io/badge/Sails.js-0.12.3-46AAC0.svg)](http://sailsjs.org/) 
+[![Client](https://img.shields.io/badge/Backbone-1.3.3-0071B5.svg)](http://backbonejs.org/) 
 [![View](https://img.shields.io/badge/React.Js-0.14.6-00D8FF.svg)](http://facebook.github.io/react/) 
-[![UI](https://img.shields.io/badge/BootStrap+React-0.28.1-blue.svg)](https://react-bootstrap.github.io/) 
+[![UI](https://img.shields.io/badge/BootStrap+React-0.29.3-blue.svg)](https://react-bootstrap.github.io/) 
 [![Build](https://img.shields.io/badge/Webpack-1.12.9-lightgrey.svg)](http://webpack.github.io/)
 
 The Client uses **Flux** built using Backbone [events](http://backbonejs.org/#Events). A simple implementation example can be found [here](http://jsfiddle.net/codemeasandwich/bsj8onr8/).
@@ -31,7 +31,7 @@ The Client uses **Flux** built using Backbone [events](http://backbonejs.org/#Ev
 
 **That are 4 areas when editing**
 
-1. Application logic [/assets/js/app.js](https://github.com/codemeasandwich/HopJS/tree/master/assets/js/app.js)
+1. Application logic [/assets/js/logic/...](https://github.com/codemeasandwich/HopJS/tree/master/assets/js/logic)
 2. User interface [/assets/js/views/...](https://github.com/codemeasandwich/HopJS/tree/master/assets/js/views)
 3. Storage logic [/api/models/...](https://github.com/codemeasandwich/HopJS/tree/master/api/models)
 4. Application config [/config/platform.js](https://github.com/codemeasandwich/HopJS/tree/master/config/platform.js)

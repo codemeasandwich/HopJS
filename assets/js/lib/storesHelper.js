@@ -46,7 +46,8 @@ var AppData  = require('./models');
       this.getModelDefaults = function(module){
       
         if ( "string" !== typeof module) {
-          throw new Error("invalid argument supplied. module should be a string. " + typeof module + "given")
+          throw new Error("invalid argument supplied. module should be a string. "
+                          + typeof module + "given")
         } else if ( ! AppData.models.hasOwnProperty(module)) {
           throw new Error("invalid argument supplied. module '" + module + "' was not found.")
         }
@@ -57,7 +58,8 @@ var AppData  = require('./models');
       this.getModelInputs = function(module){
         console.count("getModelInputs");
         if ("string" !== typeof module) {
-          throw new Error("invalid argument supplied. module should be a string. " + typeof module + " given")
+          throw new Error("invalid argument supplied. module should be a string. "
+                          + typeof module + " given")
         } else if ( ! AppData.attributes.hasOwnProperty(module)) {
           console.error(module,new Error().stack);
          

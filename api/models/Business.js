@@ -6,7 +6,7 @@
  */ 
 
 module.exports = {
-
+  hop:true,
   schema: true,
 
   attributes: {

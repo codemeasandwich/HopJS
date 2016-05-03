@@ -6,12 +6,13 @@
 var callBacks = [];
 
 var dispatcher = function(AppDB){
-  console.log(" -- AppDB",AppDB);
+  //console.log(" -- AppDB",AppDB);
 //++++++++++++++++++++++++++++ load modules from logic
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
   var req = require.context("../logic", true, /\.js$/);
   var fileNames = req.keys();
+  //console.log(" +fileNames",fileNames)
    // the 'map' load the file names from keys into the module.exports
   fileNames.map(req).forEach(function(worker,index){
   
@@ -27,8 +28,8 @@ var dispatcher = function(AppDB){
       throw new Error("'reactor' must be a function. See "+fileNames[index]);
     }
     
-    console.log("loading logic from",fileNames[index]);
-    console.log("will fire",worker);
+    //console.log("loading logic from",fileNames[index]);
+    //console.log("will fire",worker);
     callBacks.push(worker);
     
   });
@@ -44,7 +45,7 @@ var dispatcher = function(AppDB){
     if ("undefined" === typeof actionName) {
       throw new Error("actionName is undefined");
     }
-    console.log("Fire:"+actionName,data);
+    //console.log("Fire:"+actionName,data);
     
     var workToDo = 
     callBacks.reduce(function(workers,worker){
@@ -72,7 +73,7 @@ var dispatcher = function(AppDB){
       return workers;
     },[]);
     
-    console.info(actionName+" is being handled by ",statistics);
+    //console.info(actionName+" is being handled by ",statistics);
     
     return Promise.all(workToDo);
     

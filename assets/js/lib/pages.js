@@ -1,12 +1,24 @@
 "use strict"
+var userRoutes = {};
+var userRoutesList = require("./../wiring/routes");
 
-var userRoutes = require("./../wiring/routes");
+//console.log(" > userRoutesList",userRoutesList);
+//read all files from /.views
+var req = require.context("./../.views", true, /\.js$/);
+// an array of all files in folder
+//var fileNames = req.keys();
+
+for (var route in userRoutesList) {
+  if (userRoutesList.hasOwnProperty(route)
+  && "string" === typeof userRoutesList[route]) {
+    userRoutes[route] = req("./"+userRoutesList[route]+".js");
+  }
+}
+
 var Actions    = require('./../wiring/actions');
 
 module.exports = function(AppData,AppDB, dispatcher){
-      
-console.log(" KX AppData",AppData);
-      
+
 //++++++++++++++++++++++++++++++++ Initiate the router
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
     var routes = { }
@@ -50,25 +62,17 @@ console.log(" KX AppData",AppData);
     var Content = React.createClass({
         displayName: 'Body Content',
         getInitialState : function(){
-          console.log('Body Content',"getInitialState");
           AppData.bind(this.reload);
           return { count : 0 }  
         },
         reload : function(type, data, changes){
-          console.log("RELOAD",arguments);
-          //console.log(JSON.stringify(arguments));
-          
           this.setState({ count : this.state.count++ });
         },
         componentDidMount : function(){
-          //TODO: on Backbone colltion change.. reload view
-          console.log('Body Content',"componentDidMount");
           AppData.bind(this.reload);
-          // dispatcher.fire(this.reload)
         },
         componentWillUnmount : function(){
           AppData.unbind(this.reload);
-         // dispatcher.remove(this.reload)
         },
         render: function(){
           
@@ -82,8 +86,6 @@ console.log(" KX AppData",AppData);
     })
     
     function load(pageElemt,loadModel) {
-        
-        console.log("LOAD",pageElemt);
         
         var route = { name : name, params : {} };
         var platform = require('./../../../config/platform').platform;
