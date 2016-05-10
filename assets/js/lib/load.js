@@ -6,35 +6,35 @@
  require('./bootstrap');
  
 //=====================================================
-//======================================= Setup the app
+//============================================ template
 //=====================================================
 
 //++++++++++++++++++++++++++++++++++ initialise stores
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
-/*
-var AppData = require('./lib/models');
 
-var modelNames = Object.keys(AppData.collections);
+var waterLineModels = require('./template/files');
+                      require('./template/addons');
 
-var stores = modelNames.reduce(function(data,name){
-  data[name] = new AppData.collections[name]();
-  return data;
-},{});
-*/
+var backboneModels = require('./template/generator')(waterLineModels);
+
+var modelHelpers = require('./template/helpers');
+    modelHelpers = new modelHelpers(backboneModels);
+    
+var clientSideLiveData = {};
+clientSideLiveData.collections = require('./template/instance')(backboneModels.collections);
+
+var emiter = require('./template/emit')(clientSideLiveData.collections);
+
 //+++++++++++++++++++++++++++++ dispatcher / app logic
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-var AppData = require('./models');
-var AppDB = AppData.genInstances();
-
-//console.log("AppDB",AppDB);
 var Dispatcher = require('./dispatcher');
 
-var dispatcher = new Dispatcher(AppDB);
+var dispatcher = new Dispatcher(clientSideLiveData.collections);
 
 //++++++++++++++++++++++++++++++++ UI / pages / rouths
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
- var pages = require('./pages')(AppData,AppDB, dispatcher);
+ var pages = require('./pages')(emiter,clientSideLiveData, dispatcher,modelHelpers);
 
  

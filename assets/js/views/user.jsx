@@ -6,9 +6,9 @@ var AutoBreadcrumbs = require('./components/AutoBreadcrumbs');
 //console.log(" ===== user.jsx")
 
 
-var STORES = require('./../lib/storesHelper');
+//var STORES = require('./../lib/storesHelper');
 
-var attributes = STORES.getModelInputs(STORES.MODEL.USER);
+//var attributes = STORES.getModelInputs(STORES.MODEL.USER);
 
 
 
@@ -50,10 +50,14 @@ var AddUserForm = React.createClass({
     },
 
     render: function(){
+        console.log("this.props.modelHelpers",this.props.modelHelpers);
+        var modelHelpers = this.props.modelHelpers;
+        var MODEL = modelHelpers.getNames();
+        var attributes = modelHelpers.getModelInputs(MODEL.USER);
         
-        var isOk  = STORES.checkModelInput(STORES.MODEL.USER,this.state.input);
+        var isOk  = modelHelpers.checkModelInput(MODEL.USER,this.state.input);
         return  <form>
-                    { this.getForm(attributes)  }
+                    {  this.getForm(attributes) }
                     <UI.Button bsStyle="success" disabled={ !! isOk} onClick={this.addNewUser}>Add</UI.Button>
                  </form>
     }
@@ -84,7 +88,7 @@ module.exports = React.createClass({
                   <span {...this.props}/>
                   <UI.Well> Users! </UI.Well>
                   <AutoBreadcrumbs />
-                  <AddUserForm ACTION_ADD={this.props.Emit.ACTIONS.ADD.USER} Fire={this.props.Emit.Fire}/>
+                  <AddUserForm ACTION_ADD={this.props.Emit.ACTIONS.ADD.USER} Fire={this.props.Emit.Fire} modelHelpers={this.props.modelHelpers}/>
                   <ListUsers users={this.props.AppDB.User}/>
                 </div>
     }

@@ -1,4 +1,10 @@
 "use strict"
+
+var Backbone = require('backbone');
+
+var React    = require('react');
+var ReactDom = require('react-dom');
+
 var userRoutes = {};
 var userRoutesList = require("./../wiring/routes");
 
@@ -17,7 +23,7 @@ for (var route in userRoutesList) {
 
 var Actions    = require('./../wiring/actions');
 
-module.exports = function(AppData,AppDB, dispatcher){
+module.exports = function(AppData,AppDB, dispatcher,modelHelpers){
 
 //++++++++++++++++++++++++++++++++ Initiate the router
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -47,12 +53,7 @@ module.exports = function(AppData,AppDB, dispatcher){
       }); // END for routeNameS
     } // END for userRoutes
     
-    var Backbone = require('backbone');
-    
-    var React    = require('react');
-    var ReactDom = require('react-dom');
-    
-    var STORES  = require('./storesHelper');
+
     
     // var lastPageArgs;
     
@@ -62,24 +63,38 @@ module.exports = function(AppData,AppDB, dispatcher){
     var Content = React.createClass({
         displayName: 'Body Content',
         getInitialState : function(){
-          AppData.bind(this.reload);
+          AppData.on(this.reload);
           return { count : 0 }  
         },
         reload : function(type, data, changes){
           this.setState({ count : this.state.count++ });
         },
         componentDidMount : function(){
-          AppData.bind(this.reload);
+          AppData.on(this.reload);
         },
         componentWillUnmount : function(){
-          AppData.unbind(this.reload);
+          AppData.off(this.reload);
         },
         render: function(){
           
-            var AppDBJson = Object.keys(AppDB).reduce(function(pojo, collectionName){
-                  pojo[collectionName] = AppDB[collectionName].toJSON();
+          console.log(" ==================================== ");
+          console.log(" ============ page update =========== ");
+          console.log(" ==================================== ");
+          let collections = AppDB.collections;
+          
+          
+            var AppDBJson = Object.keys(collections).reduce(function(pojo, collectionName){
+              
+              console.log(".");
+              console.log(collectionName,collections[collectionName]);
+              
+                  pojo[collectionName] = collections[collectionName].toJSON();
                   return pojo;
-              },{})
+              },{});
+            console.log("");
+            console.log("in PAGES");
+            console.log("AppDBJson",AppDBJson);
+            console.log("");
           
             return React.createElement( this.props.page, React.__spread({AppDB:AppDBJson}, this.props))
         }
@@ -98,7 +113,8 @@ module.exports = function(AppData,AppDB, dispatcher){
           Emit : {
             ACTIONS : Actions,
             Fire : dispatcher.fire
-          }
+          },
+          modelHelpers:modelHelpers
         };
         
         ReactDom.render(React.createElement(Content, props),document.getElementById("content"));
