@@ -3,15 +3,6 @@ var React = require('react');//, ReactDOM = require('react-dom');
 var UI = require('bootstrap');
 var AutoBreadcrumbs = require('./components/AutoBreadcrumbs');
 
-//console.log(" ===== user.jsx")
-
-
-//var STORES = require('./../lib/storesHelper');
-
-//var attributes = STORES.getModelInputs(STORES.MODEL.USER);
-
-
-
 var AddUserForm = React.createClass({
     displayName: 'USER PAGE',
     getInitialState :  function() {
@@ -66,7 +57,6 @@ var AddUserForm = React.createClass({
 var ListUsers = React.createClass({
 
     render: function(){
-        //var users = [];//STORES.getData(STORES.MODEL.USER);
 
         return <UI.ButtonGroup vertical>
                    {
@@ -93,21 +83,3 @@ module.exports = React.createClass({
                 </div>
     }
 })
-
- /* propTypes: {
-    users : React.PropTypes.array.isRequired
-  },
-  
-  fluxChange : function(){
-    console.log(">>> fluxChange <<<");
-  },
-  
-  componentWillMount : function() {
-    this.fluxChange();
-  },
-  componentDidMount : function() {
-    STORES.interestedIn(this, 'User');
-  },
-  componentWillUnmount : function() {
-    STORES.disinterestedIn(this);
-  },*/

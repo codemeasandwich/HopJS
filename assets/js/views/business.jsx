@@ -5,14 +5,10 @@ var AutoBreadcrumbs = require('./components/AutoBreadcrumbs');
 
 module.exports = React.createClass({
     displayName: 'example1',
-       propTypes: {
-      route:      React.PropTypes.object
+      propTypes: {
+      route: React.PropTypes.object
     },
     render: function(){
-    
-    console.log(this.props.route);
-        return <div>
-        
-        <AutoBreadcrumbs /><UI.Well>BUsiness</UI.Well></div>
+        return <div><AutoBreadcrumbs /><UI.Well>BUsiness</UI.Well></div>
     }
 })

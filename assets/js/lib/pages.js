@@ -8,11 +8,7 @@ var ReactDom = require('react-dom');
 var userRoutes = {};
 var userRoutesList = require("./../wiring/routes");
 
-//console.log(" > userRoutesList",userRoutesList);
-//read all files from /.views
 var req = require.context("./../.views", true, /\.js$/);
-// an array of all files in folder
-//var fileNames = req.keys();
 
 for (var route in userRoutesList) {
   if (userRoutesList.hasOwnProperty(route)
@@ -77,24 +73,13 @@ module.exports = function(AppData,AppDB, dispatcher,modelHelpers){
         },
         render: function(){
           
-          console.log(" ==================================== ");
-          console.log(" ============ page update =========== ");
-          console.log(" ==================================== ");
           let collections = AppDB.collections;
           
-          
             var AppDBJson = Object.keys(collections).reduce(function(pojo, collectionName){
-              
-              console.log(".");
-              console.log(collectionName,collections[collectionName]);
-              
+     
                   pojo[collectionName] = collections[collectionName].toJSON();
                   return pojo;
               },{});
-            console.log("");
-            console.log("in PAGES");
-            console.log("AppDBJson",AppDBJson);
-            console.log("");
           
             return React.createElement( this.props.page, React.__spread({AppDB:AppDBJson}, this.props))
         }

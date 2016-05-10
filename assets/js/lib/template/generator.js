@@ -1,9 +1,7 @@
 'use strict'
-//console.info("# loading GEN models");
+
 var Backbone = require('backbone');
 var waterLine2BackBone = require('./mapper');
-
-//console.info("## loaded GEN models",module.exports);
 
 var models = {};
 var attributes = {};
@@ -29,7 +27,6 @@ for (var modelName in serverModels){
   
   attributes[modelName] = ormAttributes;
 }
-//console.log(">>models",models)
 
 var collections = {};
 
@@ -40,15 +37,10 @@ for (var modelName in models){
   });
 }
 
-//console.log(">>collections",collections)
-
  return { 
 		models:models, 
 		collections:collections, 
-		attributes:attributes, 
-		//checkModelInput:checkModelInput,
-    //getModelInputs:getModelInputs,
-    //getModelDefaults:getModelDefaults
+		attributes:attributes
 	};
 }
 

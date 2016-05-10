@@ -1,5 +1,5 @@
 'use strict'
-//console.info("# loading GEN models");
+
 var Backbone = require('backbone');
 
 //=====================================================
@@ -15,21 +15,16 @@ module.exports = function (Model){
     // validate:function(){},
     // toJSON:function(){}
   }
-  //console.log("modle",Object.forEach);
- // Model.attributes.forEach(function(typeObj, name){
+  
  for (var name in Model.attributes){
  var typeObj = Model.attributes[name];
     
     typeObj = ("object" == typeof typeObj) ? typeObj : { type : typeObj }
     
     if (typeObj.defaultsTo) {
-      
       bluePrint.defaults[name] = typeObj.defaultsTo;
-    
     } else if (typeObj.model) {
       // model ID
-    
-      
     } else{
       switch(typeObj.type.toLowerCase()) {
           case "string":
@@ -62,8 +57,7 @@ module.exports = function (Model){
       } 
     }
     bluePrint.defaults[name];
-  }//)
-  //console.log(bluePrint);
+  }
   return Backbone.Model.extend(bluePrint);
 }
 

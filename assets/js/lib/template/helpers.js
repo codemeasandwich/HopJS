@@ -15,8 +15,6 @@ module.exports = function(backboneModels){
 
  this.checkModelInput = function(moduleName,incomingModuleData){
   
-  //console.log(moduleName, arguments);
-  
     if( ! moduleName){
       throw new Error("moduleName was set to " + moduleName);
     } else if( ! attributes[moduleName]){
@@ -56,13 +54,12 @@ module.exports = function(backboneModels){
 
   
   this.getModelInputs = function  (module){
-    console.count("getModelInputs");
+
     if ("string" !== typeof module) {
       throw new Error("invalid argument supplied. module should be a string. "
                       + typeof module + " given")
     } else if ( ! attributes.hasOwnProperty(module)) {
-      console.error(module,new Error().stack);
-     
+      //console.error(module,new Error().stack);
       throw new Error("invalid argument supplied. module '" + module + "' was not found.")
     }
   
