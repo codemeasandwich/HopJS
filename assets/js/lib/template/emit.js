@@ -4,18 +4,16 @@
 
 module.exports = function(collections){
   
-  return {
     //addOnChange
-    on:function(callBack){
+    this.on = function(callBack){
       onAppDataChange(true,callBack,collections);
     },
     //removeOnChange
-    off:function(callBack){
+    this.off = function(callBack){
       onAppDataChange(false,callBack,collections);
     }
-  }
+  
 };
-
 
 
 function onAppDataChange(toBind,callBack,collections) {

@@ -19,7 +19,7 @@ for (var route in userRoutesList) {
 
 var Actions    = require('./../wiring/actions');
 
-module.exports = function(AppData,AppDB, dispatcher,modelHelpers){
+module.exports = function(UnderlyingChange,clientSideLiveData, dispatcher, modelHelpers){
 
 //++++++++++++++++++++++++++++++++ Initiate the router
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -59,29 +59,27 @@ module.exports = function(AppData,AppDB, dispatcher,modelHelpers){
     var Content = React.createClass({
         displayName: 'Body Content',
         getInitialState : function(){
-          AppData.on(this.reload);
+          UnderlyingChange.on(this.reload);
           return { count : 0 }  
         },
         reload : function(type, data, changes){
           this.setState({ count : this.state.count++ });
         },
         componentDidMount : function(){
-          AppData.on(this.reload);
+          UnderlyingChange.on(this.reload);
         },
         componentWillUnmount : function(){
-          AppData.off(this.reload);
+          UnderlyingChange.off(this.reload);
         },
         render: function(){
           
-          let collections = AppDB.collections;
-          
-            var AppDBJson = Object.keys(collections).reduce(function(pojo, collectionName){
+            var dataJson = Object.keys(clientSideLiveData).reduce(function(pojo, collectionName){
      
-                  pojo[collectionName] = collections[collectionName].toJSON();
+                  pojo[collectionName] = clientSideLiveData[collectionName].toJSON();
                   return pojo;
               },{});
           
-            return React.createElement( this.props.page, React.__spread({AppDB:AppDBJson}, this.props))
+            return React.createElement( this.props.page, React.__spread({AppDB:dataJson}, this.props))
         }
     })
     
@@ -102,7 +100,9 @@ module.exports = function(AppData,AppDB, dispatcher,modelHelpers){
           modelHelpers:modelHelpers
         };
         
-        ReactDom.render(React.createElement(Content, props),document.getElementById("content"));
+        let body = React.createElement(Content, props);
+            
+        ReactDom.render(body,document.getElementById("content"));
     }
     
     

@@ -15,26 +15,28 @@
 var waterLineModels = require('./template/files');
                       require('./template/addons');
 
-var backboneModels = require('./template/generator')(waterLineModels);
-
-var modelHelpers = require('./template/helpers');
-    modelHelpers = new modelHelpers(backboneModels);
+var Generator = require('./template/generator');
+var backboneModels = new Generator(waterLineModels);
     
-var clientSideLiveData = {};
-clientSideLiveData.collections = require('./template/instance')(backboneModels.collections);
+var Helpers = require('./template/helpers');
+var modelHelpers = new Helpers(backboneModels);
+    
+var Instance = require('./template/instance');
+var clientSideLiveData = new Instance(backboneModels.collections);
 
-var emiter = require('./template/emit')(clientSideLiveData.collections);
+var Emit = require('./template/emit')
+var UnderlyingChange = new Emit(clientSideLiveData);
 
 //+++++++++++++++++++++++++++++ dispatcher / app logic
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 var Dispatcher = require('./dispatcher');
 
-var dispatcher = new Dispatcher(clientSideLiveData.collections);
+var dispatcher = new Dispatcher(clientSideLiveData);
 
 //++++++++++++++++++++++++++++++++ UI / pages / rouths
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
- var pages = require('./pages')(emiter,clientSideLiveData, dispatcher,modelHelpers);
+ var pages = require('./pages')(UnderlyingChange,clientSideLiveData, dispatcher,modelHelpers);
 
  

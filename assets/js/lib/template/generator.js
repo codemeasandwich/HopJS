@@ -37,11 +37,10 @@ for (var modelName in models){
   });
 }
 
- return { 
-		models:models, 
-		collections:collections, 
-		attributes:attributes
-	};
+  
+		this.models = models;
+		this.collections = collections;
+		this.attributes = attributes;
 }
 
 module.exports = generator;

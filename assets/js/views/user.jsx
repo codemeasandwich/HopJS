@@ -72,7 +72,7 @@ module.exports = React.createClass({
     displayName: 'USER PAGE',
 
     render: function(){
-        
+        console.log("this",this);
         console.log("isOk",this.props);
         return <div>
                   <span {...this.props}/>
