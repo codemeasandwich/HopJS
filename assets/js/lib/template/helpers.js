@@ -13,7 +13,7 @@ module.exports = function(backboneModels){
 //++++++++++++++++++++++++++++++++++ Check Model Input
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
- this.checkModelInput = function(moduleName,incomingModuleData){
+ this.checkModelInput = (moduleName,incomingModuleData)=>{
   
     if( ! moduleName){
       throw new Error("moduleName was set to " + moduleName);
@@ -53,7 +53,7 @@ module.exports = function(backboneModels){
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
   
-  this.getModelInputs = function  (module){
+  this.getModelInputs = (module)=>{
 
     if ("string" !== typeof module) {
       throw new Error("invalid argument supplied. module should be a string. "
@@ -69,7 +69,7 @@ module.exports = function(backboneModels){
 //+++++++++++++++++++++++++++++++++++ Get Model Inputs
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
   
-  this.getModelDefaults = function (module){
+  this.getModelDefaults = (module)=>{
   
     if ( "string" !== typeof module) {
       throw new Error("invalid argument supplied. module should be a string. "
@@ -85,10 +85,10 @@ module.exports = function(backboneModels){
 //++++++++++++++++++++++++++++++++++++ Get Model Names
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
   
-  this.getNames = function(){
+  this.getNames = ()=>{
   
     return Object.keys(models)
-        .reduce(function(previousValue, currentValue){ 
+        .reduce((previousValue, currentValue)=>{ 
           previousValue[currentValue.toUpperCase()] = currentValue;
           return previousValue;
         },{});

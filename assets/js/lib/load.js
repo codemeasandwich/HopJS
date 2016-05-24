@@ -1,9 +1,16 @@
 "user strict";
+
+  console.log(" +-+-+-+-+-+ ");
+  console.log(" |H|o|p|J|s| ");
+  console.log(" +-+-+-+-+-+ ");
+
 //=====================================================
 //=============== >> The enrty point << ===============
 //=====================> webpack <=====================
 
- require('./bootstrap');
+ var extesionNames = require('../../../config/languageExtensions').init();
+ 
+ console.info("extesions loaded",extesionNames);
  
 //=====================================================
 //============================================ template

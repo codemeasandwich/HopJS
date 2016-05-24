@@ -47,6 +47,7 @@ module.exports = function(UnderlyingChange,clientSideLiveData, dispatcher, model
       routeNameS.forEach(function(routeID){
         routes[routeID] = load.bind( null, userRoutes[routeName] )
       }); // END for routeNameS
+      
     } // END for userRoutes
     
 

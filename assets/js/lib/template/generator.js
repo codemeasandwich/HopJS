@@ -14,7 +14,7 @@ var attributes = {};
 var generator = function(serverModels){
 
 for (var modelName in serverModels){
-  models[modelName] = waterLine2BackBone(serverModels[modelName]);
+  models[modelName] = waterLine2BackBone(modelName, serverModels[modelName]);
   var ormAttributes = serverModels[modelName].attributes;
   
   // standardies into attribute object
@@ -33,10 +33,10 @@ var collections = {};
 for (var modelName in models){
   collections[modelName] =  Backbone.Collection.extend({
     model:models[modelName],
-    url:'/'+modelName
+    url:modelName
   });
 }
-
+//console.log(">>>>",collections);
   
 		this.models = models;
 		this.collections = collections;

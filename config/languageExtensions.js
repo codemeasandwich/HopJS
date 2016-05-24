@@ -5,6 +5,8 @@
 
 module.exports.init = function() {
 
+  let extesionNames = [];
+
 //=====================================================
 //================================== JS prototype hacks
 //=====================================================
@@ -23,6 +25,7 @@ module.exports.init = function() {
      var i = this.indexOf(val);
           return i>-1 ? this.splice(i, 1) : [];
    };
+   extesionNames.push("Array.prototype.remove");
  }
 /**
 * Array method to convert into an object
@@ -38,6 +41,7 @@ if ( ! Array.prototype.toObject) {
    Array.prototype.toObject = function(keys){
       return this.reduce(function(prev,curr,index){ prev[keys[index]] = curr; return prev },{})
    }
+   extesionNames.push("Array.prototype.toObject");
 }
 
 /**
@@ -95,6 +99,7 @@ if ( ! String.prototype.splitCamileCase) {
                         return s.trim().toLowerCase();
                     });
   }
+   extesionNames.push("String.prototype.splitCamileCase");
 }
 
 //+++++++++++++++++++++++++++++ Part of the CRC hashing
@@ -116,7 +121,7 @@ function genCRCTable(){
 
 var crcTable = genCRCTable();
 
-if ( ! String.prototype.crc) 
+if ( ! String.prototype.crc) {
  String.prototype.crc = function(){
 
     var crc = 0 ^ (-1);
@@ -128,33 +133,7 @@ if ( ! String.prototype.crc)
     return (crc ^ (-1)) >>> 0;
     
  }
-   
-//++++++++++++++++++++++++++++++++++ String startsWith
-//++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-  if (typeof String.prototype.startsWith != 'function') {
-    
-    // logger.info(" +++ String.prototype.startsWith");
-    
-    // see below for better implementation!
-    String.prototype.startsWith = function (str){
-    
-      return this.slice(0,str.length).toLowerCase().indexOf(str.toLowerCase()) === 0;
-    };
-  }
-  
-//++++++++++++++++++++++++++++++++++++ String endsWith
-//++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-  if (typeof String.prototype.endsWith != 'function') {
-       
-    // logger.info(" +++ String.prototype.endsWith");
-      
-    // see below for better implementation!
-    String.prototype.endsWith = function (str){
-     // console.log(this.slice(-str.length),str);
-      return this.slice(-str.length).toLowerCase().indexOf(str.toLowerCase()) === 0;
-    };
-  }
-
+   extesionNames.push("String.prototype.crc");
+}
+  return extesionNames;
 };

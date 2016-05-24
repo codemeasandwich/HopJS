@@ -8,6 +8,9 @@ var Accounts = function(AppDB){
       
     return new Promise(function(resolve, reject) {
       AppDB.User.add(data);
+      console.log("AppDB.User",AppDB.User);
+      AppDB.User.sync();
+      console.log(" -- sync -- ");
       resolve(true);
     }); // END Promise
   };

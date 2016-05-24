@@ -5,11 +5,11 @@
 module.exports = function(collections){
   
     //addOnChange
-    this.on = function(callBack){
+    this.on = (callBack)=>{
       onAppDataChange(true,callBack,collections);
     },
     //removeOnChange
-    this.off = function(callBack){
+    this.off = (callBack)=>{
       onAppDataChange(false,callBack,collections);
     }
   

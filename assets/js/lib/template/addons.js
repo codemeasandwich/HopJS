@@ -6,7 +6,7 @@ var Backbone = require('backbone');
 //=============================== Backbone Model update
 //=====================================================
 
-  Backbone.Model.prototype.update = function (key, val, options) {
+  Backbone.Model.prototype.update = (key, val, options) => {
     
     if (undefined === val) {
       console.warn("You are setting undefined as a value!");

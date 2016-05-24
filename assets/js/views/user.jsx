@@ -41,7 +41,7 @@ var AddUserForm = React.createClass({
     },
 
     render: function(){
-        console.log("this.props.modelHelpers",this.props.modelHelpers);
+        //console.log("this.props.modelHelpers",this.props.modelHelpers);
         var modelHelpers = this.props.modelHelpers;
         var MODEL = modelHelpers.getNames();
         var attributes = modelHelpers.getModelInputs(MODEL.USER);
@@ -72,6 +72,7 @@ module.exports = React.createClass({
     displayName: 'USER PAGE',
 
     render: function(){
+        //console.log("yo",yo);
         console.log("this",this);
         console.log("isOk",this.props);
         return <div>
