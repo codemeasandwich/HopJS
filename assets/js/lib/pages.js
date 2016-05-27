@@ -1,39 +1,43 @@
 "use strict"
 
-var Backbone = require('backbone');
+let Backbone = require('backbone');
 
-var React    = require('react');
-var ReactDom = require('react-dom');
+let React    = require('react');
+let ReactDom = require('react-dom');
 
-var userRoutes = {};
-var userRoutesList = require("./../wiring/routes");
+let userRoutes = {};
+let userRoutesList = require("./../wiring/routes");
 
-var req = require.context("./../.views", true, /\.js$/);
+let req = require.context("./../.views", true, /\.js$/);
 
-for (var route in userRoutesList) {
+for (let route in userRoutesList) {
+  //console.log("./"+userRoutesList[route]+".js");
   if (userRoutesList.hasOwnProperty(route)
   && "string" === typeof userRoutesList[route]) {
     userRoutes[route] = req("./"+userRoutesList[route]+".js");
   }
 }
 
-var Actions    = require('./../wiring/actions');
+let Actions    = require('./../wiring/actions');
 
 module.exports = function(UnderlyingChange,clientSideLiveData, dispatcher, modelHelpers){
 
 //++++++++++++++++++++++++++++++++ Initiate the router
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
-    var routes = { }
+    let routes = { }
       
-    for (var routeName in userRoutes){
+    for (let routeName in userRoutes){
+      
       
       if( ! userRoutes.hasOwnProperty(routeName)){
         continue; // if the property is not on the routes object skip to the next one
       }
       
-      var routeNameS = [routeName];
+      //urlPattern[routeName] = RoutePattern.fromString(routeName);
       
-      var charCount = routeName.length;
+      let routeNameS = [routeName];
+      
+      let charCount = routeName.length;
       
       //get the last char from routeName String
       if (routeName[charCount -1] !== "/"
@@ -44,20 +48,20 @@ module.exports = function(UnderlyingChange,clientSideLiveData, dispatcher, model
         routeNameS.push(routeName.substr(charCount - 2))
       }
       
-      routeNameS.forEach(function(routeID){
-        routes[routeID] = load.bind( null, userRoutes[routeName] )
+      routeNameS.forEach(function(routePattern){
+        routes[routePattern] = load.bind( null, userRoutes[routeName],routePattern )
       }); // END for routeNameS
       
     } // END for userRoutes
     
 
     
-    // var lastPageArgs;
+    // let lastPageArgs;
     
     // Execution sequence of a React component’s lifecycle methods << Good to know ;)
     // http://javascript.tutorialhorizon.com/2014/09/13/execution-sequence-of-a-react-components-lifecycle-methods/
     
-    var Content = React.createClass({
+    let Content = React.createClass({
         displayName: 'Body Content',
         getInitialState : function(){
           UnderlyingChange.on(this.reload);
@@ -74,7 +78,7 @@ module.exports = function(UnderlyingChange,clientSideLiveData, dispatcher, model
         },
         render: function(){
           
-            var dataJson = Object.keys(clientSideLiveData).reduce(function(pojo, collectionName){
+            let dataJson = Object.keys(clientSideLiveData).reduce(function(pojo, collectionName){
      
                   pojo[collectionName] = clientSideLiveData[collectionName].toJSON();
                   return pojo;
@@ -84,12 +88,59 @@ module.exports = function(UnderlyingChange,clientSideLiveData, dispatcher, model
         }
     })
     
-    function load(pageElemt,loadModel) {
+//=====================================================
+//================================ Page load controller
+//=====================================================
+    
+    function load(pageElemt, routePattern) {
+     
+//++++++++++++++++++++++++++++++++++ process arguments
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+        let args = [].slice.call(arguments).slice(2);
+       
+//+++++++++++++++++++++++++++++++ map args to fragment
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        let quary = args.pop();
         
-        var route = { name : name, params : {} };
-        var platform = require('./../../../config/platform').platform;
+        if (quary) {
+          try{
+          quary = JSON.parse('{"' + quary.replace(/&/g, '","').replace(/=/g,'":"') + '"}',
+                 function(key, value) { return key===""?value:decodeURIComponent(value) });
+          } catch (err){
+            console.error("Error in parsing URL quary. Check all keys has a vaule",quary);
+            quary =  {};
+          }
+        } else {
+          quary =  {};
+        }
         
-        var props = {
+        let route = {
+          url : Backbone.history.getFragment(),
+          path : Backbone.history.getFragment().split("?")[0],
+          Pattern : routePattern,
+          quary : quary,
+          fragments : {}
+        };
+        
+        if(routePattern.includes(":")){
+                    
+          let fragmentNames = 
+          routePattern.split(":").map((piece)=>{return piece.split("/")[0]}).slice(1);
+          
+           route.fragments =
+           fragmentNames.reduce((fragments, fragmentName,index)=>{
+              fragments[fragmentName] = args[index];
+              return fragments;
+            },{});
+        }
+        
+        console.log(route);
+        
+        let platform = require('./../../../config/platform').platform;
+        
+        let props = {
           page : pageElemt,
           route : route,
           platform : platform,
@@ -110,14 +161,14 @@ module.exports = function(UnderlyingChange,clientSideLiveData, dispatcher, model
     //+++++++++++++++++++++++++++++++++++ get router hashs
     //++++++++++++++++++++++++++++++++++++++++++++++++++++
     
-    var AppRouter = Backbone.Router.extend({
+    let AppRouter = Backbone.Router.extend({
       routes:routes
     });
       
     //+++++++++++++++++++++++++++++++++++++ router contorl
     //++++++++++++++++++++++++++++++++++++++++++++++++++++
         
-    var router = new AppRouter();
+    let router = new AppRouter();
     
     Backbone.history.start({pushState: true});
     
@@ -125,7 +176,7 @@ module.exports = function(UnderlyingChange,clientSideLiveData, dispatcher, model
     //===================================== Take over links
     //=====================================================
     
-    var $ = require('jquery');
+    let $ = require('jquery');
     
     // All navigation that is relative should be passed through the navigate
     // method, to be processed by the router.  If the link has a data-bypass
@@ -134,8 +185,8 @@ module.exports = function(UnderlyingChange,clientSideLiveData, dispatcher, model
     $(document).on("click", "a:not([data-bypass])", function(evt) {
       
       // Get the anchor href and protcol
-      var href = $(this).attr("href");
-      var protocol = this.protocol + "//";
+      let href = $(this).attr("href");
+      let protocol = this.protocol + "//";
     
       // Ensure the protocol is not part of URL, meaning its relative.
       if (href && href.slice(0, protocol.length) !== protocol &&

@@ -1,7 +1,6 @@
 'use strict'
 var React = require('react');
 var UI = require('bootstrap');
-var AutoBreadcrumbs = require('./components/AutoBreadcrumbs');
 
 module.exports = React.createClass({
     displayName: 'example1',
@@ -9,6 +8,9 @@ module.exports = React.createClass({
       route: React.PropTypes.object
     },
     render: function(){
-        return <div><AutoBreadcrumbs /><UI.Well>BUsiness</UI.Well></div>
+        return <div>
+        <UI.Well> List of tasks </UI.Well>
+        <a href="/tasks/1"> Task A</a>
+        </div>
     }
 })

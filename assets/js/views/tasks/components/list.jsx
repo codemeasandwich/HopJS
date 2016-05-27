@@ -7,6 +7,8 @@ module.exports = React.createClass({
     
     render: function(){
         return <div>
-        <UI.Well>notifications</UI.Well></div>
+        <UI.Well>list tasks</UI.Well>
+        <NewTasks/>
+        <Tasks/></div>
     }
 })

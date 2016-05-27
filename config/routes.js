@@ -35,8 +35,7 @@ module.exports.routes = {
   '/*' : {
     controller: 'MainController',
     skipAssets: true
-  },
-  '/api/:model' : 'ApiController'
+  }
   
   /***************************************************************************
   *                                                                          *

@@ -5,8 +5,6 @@ var UI = require('bootstrap');
 
 var Sparklines = require('react-sparklines').Sparklines;
 var SparklinesLine = require('react-sparklines').SparklinesLine;
-
-
  
  
 module.exports = React.createClass({
@@ -21,11 +19,7 @@ module.exports = React.createClass({
   <SparklinesLine color="blue" />
 </Sparklines>
                   <h1>{this.props.platform.name}</h1>
-                  <UI.Button bsStyle="primary" href="#">Test</UI.Button> 
-                  <UI.Button bsStyle="primary" href="user">All Users</UI.Button> 
-                  <UI.Button bsStyle="primary" href="user/42">Users 42</UI.Button> 
-                  <UI.Button bsStyle="success" href="business?sdf=sdf&s4f=5">Business</UI.Button> 
-                  <UI.Button bsStyle="info"    href="task">Tasks</UI.Button>
+                  <a href="/tasks"> Tasks</a>
                 </div>
     }
 })

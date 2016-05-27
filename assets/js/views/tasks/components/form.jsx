@@ -1,7 +1,6 @@
 'use strict'
 var React = require('react');//, ReactDOM = require('react-dom');
 var UI = require('bootstrap');
-var AutoBreadcrumbs = require('./components/AutoBreadcrumbs');
 
 var AddUserForm = React.createClass({
     displayName: 'USER PAGE',
@@ -72,13 +71,8 @@ module.exports = React.createClass({
     displayName: 'USER PAGE',
 
     render: function(){
-        //console.log("yo",yo);
-        console.log("this",this);
-        console.log("isOk",this.props);
         return <div>
                   <span {...this.props}/>
-                  <UI.Well> Users! </UI.Well>
-                  <AutoBreadcrumbs />
                   <AddUserForm ACTION_ADD={this.props.Emit.ACTIONS.ADD.USER} Fire={this.props.Emit.Fire} modelHelpers={this.props.modelHelpers}/>
                   <ListUsers users={this.props.AppDB.User}/>
                 </div>
