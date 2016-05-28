@@ -49,7 +49,7 @@ module.exports = function(UnderlyingChange,clientSideLiveData, dispatcher, model
       }
       
       routeNameS.forEach(function(routePattern){
-        routes[routePattern] = load.bind( null, userRoutes[routeName],routePattern )
+        routes[routePattern] = load.bind(null, userRoutes[routeName],routePattern )
       }); // END for routeNameS
       
     } // END for userRoutes
@@ -106,10 +106,27 @@ module.exports = function(UnderlyingChange,clientSideLiveData, dispatcher, model
         
         if (quary) {
           try{
-          quary = JSON.parse('{"' + quary.replace(/&/g, '","').replace(/=/g,'":"') + '"}',
-                 function(key, value) { return key===""?value:decodeURIComponent(value) });
+         
+          // fix missing values
+          quary = quary.split("&").reduce((items,quaryItem)=>{
+            
+            let key_value = quaryItem.split("=");
+            
+            // no value set to null
+            items[decodeURIComponent(key_value[0])] =
+              (1 === key_value.length) ? null : decodeURIComponent(key_value[1]);
+            
+            // cast to boolean
+            
+            // cast to int
+            
+            // cast to float
+                                                                             
+            return items;
+            },{});
+            
           } catch (err){
-            console.error("Error in parsing URL quary. Check all keys has a vaule",quary);
+            console.error(err);
             quary =  {};
           }
         } else {
