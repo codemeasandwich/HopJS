@@ -1,3 +1,6 @@
+'use strict'
+var moment = require('moment');
+
 /**
  * User.js
  *
@@ -7,19 +10,21 @@
 
 module.exports = {
 
+  hop:true,
   schema: true,
 
   attributes: {
     name: {
-      type:'String',
+      type:'Text',
       required: true
     },
-    
-    assigned: {
-      model: 'User',
-      required: true
+    deadline: {
+      type:'datetime',
+      required: true,
+      defaultsTo: function() {
+        return moment().add(1,"hours").toDate();
+      }
     },
-    
     completed: {
       type:'Boolean',
       defaultsTo:false
