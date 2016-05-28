@@ -23,7 +23,23 @@ for (var modelName in serverModels){
     if (typeof ormAttributes[attribute] == "string" ) {
       ormAttributes[attribute] = { type : ormAttributes[attribute] }
     }
+    
+    if ('undefined' === typeof ormAttributes[attribute].type) {
+      console.warn("Unhandled attribute:"+attribute+" in "+modelName);
+      continue;
+    }
+    
+    ormAttributes[attribute].type = ormAttributes[attribute].type.toLowerCase();
+    
+    if("datetime" === ormAttributes[attribute].type){
+      ormAttributes[attribute].type = "date";
+    }
+    if ("boolean" === ormAttributes[attribute].type) {
+      ormAttributes[attribute].type = "checkbox";
+    }
+    
   }
+  
   
   attributes[modelName] = ormAttributes;
 }
