@@ -55,16 +55,19 @@ in HopJS directory, enter the command
 ```
 Now you can check out the server running on
 
-[localhost:1337](http://localhost:1337)
+[localhost:2020](http://localhost:2020)
 
 #### todo
+* unit-tests
 * ES6 -> ES5/4 transforms
 * Error Logging
-* Client side Lang
+* Client side localisation
 * React Hot Loader
 * Live-Reload
 * JSX not watched by Nodemon
 * set code style
+* compress JS for production
+* webpack assets CSS + FONTS
 
 #### random commands
 ``npm test``
