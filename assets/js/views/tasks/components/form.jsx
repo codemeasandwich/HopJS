@@ -1,16 +1,16 @@
 'use strict'
-var React = require('react');//, ReactDOM = require('react-dom');
+var React = require('react');
 var UI = require('bootstrap');
 
 var AddUserForm = React.createClass({
-    displayName: 'USER PAGE',
+    displayName: 'TASK FORM',
     getInitialState :  function() {
         return {
           input : { }
         }
     },
 
-    addNewUser : function() {
+    addNewTask : function() {
       this.props.Fire(this.props.ACTION_ADD, this.state.input)
       .then(function(wasHandled){
         console.info("Dispatcher call finished",wasHandled)
@@ -43,24 +43,31 @@ var AddUserForm = React.createClass({
         //console.log("this.props.modelHelpers",this.props.modelHelpers);
         var modelHelpers = this.props.modelHelpers;
         var MODEL = modelHelpers.getNames();
-        var attributes = modelHelpers.getModelInputs(MODEL.USER);
+        console.log("MODEL",MODEL)
+        var attributes = modelHelpers.getModelInputs(MODEL.TASK);
         
-        var isOk  = modelHelpers.checkModelInput(MODEL.USER,this.state.input);
+        var isOk  = modelHelpers.checkModelInput(MODEL.TASK,this.state.input);
         return  <form>
                     {  this.getForm(attributes) }
-                    <UI.Button bsStyle="success" disabled={ !! isOk} onClick={this.addNewUser}>Add</UI.Button>
+                    <UI.Button bsStyle="success" disabled={ !! isOk} onClick={this.addNewTask}>Add</UI.Button>
                  </form>
     }
 });
 
 var ListUsers = React.createClass({
 
+    getDefaultProps: function() {
+      return {
+        tasks: []
+      };
+    },
+
     render: function(){
 
         return <UI.ButtonGroup vertical>
                    {
-                    this.props.users.map(function(user){
-                      return <UI.Button key={user.firstName}>{user.firstName}</UI.Button>
+                    this.props.tasks.map(function(task){
+                      return <UI.Button key={task.firstName}>{task.firstName}</UI.Button>
                     })
                    }
                 </UI.ButtonGroup>
@@ -68,13 +75,16 @@ var ListUsers = React.createClass({
 });
 
 module.exports = React.createClass({
-    displayName: 'USER PAGE',
-
+    displayName: 'FORM PAGE',
     render: function(){
+    
         return <div>
                   <span {...this.props}/>
-                  <AddUserForm ACTION_ADD={this.props.Emit.ACTIONS.ADD.USER} Fire={this.props.Emit.Fire} modelHelpers={this.props.modelHelpers}/>
-                  <ListUsers users={this.props.AppDB.User}/>
+                  <AddUserForm
+                    ACTION_ADD={this.props.Emit.ACTIONS.ADD.TASK}
+                    Fire={this.props.Emit.Fire}
+                    modelHelpers={this.props.modelHelpers}/>
+                  <ListUsers users={this.props.AppDB.Task}/>
                 </div>
     }
 })
