@@ -66,8 +66,8 @@ Now you can check out the server running on
 * Live-Reload
 * JSX not watched by Nodemon
 * set code style
-* compress JS for production
-* webpack assets CSS + FONTS
+* compress & hide source map for production
+* webpack [assets CSS + FONTS](https://webpack.github.io/docs/loaders.html) [*](https://webpack.github.io/docs/using-loaders.html) [+](https://webpack.github.io/docs/list-of-loaders.html)
 
 #### random commands
 ``npm test``

@@ -5,6 +5,8 @@ let Backbone = require('backbone');
 let React    = require('react');
 let ReactDom = require('react-dom');
 
+let platform = require('./../../../config/platform').platform;
+        
 let userRoutes = {};
 let userRoutesList = require("./../wiring/routes");
 
@@ -92,23 +94,40 @@ module.exports = function(UnderlyingChange,clientSideLiveData, dispatcher, model
 //================================ Page load controller
 //=====================================================
     
+//  function load(pageElemt, routePattern, ..path fragment values.., quaryString) 
     function load(pageElemt, routePattern) {
-     
+             
+//+++++++++++++++++++++++++++++++++++ set route object
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+        let completeUrl = Backbone.history.getFragment();
+
+        let route = {
+          url : completeUrl,
+          path : completeUrl.split("?")[0],
+          Pattern : routePattern,
+          searchParams : {},
+          search : "",
+          fragments : {}
+        };
+        
 //++++++++++++++++++++++++++++++++++ process arguments
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
     
+        // remove the first 2 elements
         let args = [].slice.call(arguments).slice(2);
        
 //+++++++++++++++++++++++++++++++ map args to fragment
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+        // if no quary was set in URL this will be null
         let quary = args.pop();
         
+        // if not null
         if (quary) {
           try{
-         
+          route.search = quary;
           // fix missing values
-          quary = quary.split("&").reduce((items,quaryItem)=>{
+          route.searchParams = quary.split("&").reduce((items,quaryItem)=>{
             
             let key_value = quaryItem.split("=");
             
@@ -127,25 +146,18 @@ module.exports = function(UnderlyingChange,clientSideLiveData, dispatcher, model
             
           } catch (err){
             console.error(err);
-            quary =  {};
           }
-        } else {
-          quary =  {};
         }
         
-        let route = {
-          url : Backbone.history.getFragment(),
-          path : Backbone.history.getFragment().split("?")[0],
-          Pattern : routePattern,
-          quary : quary,
-          fragments : {}
-        };
-        
+//+++++++++++++++++++++++++++ map path fragment values
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+
         if(routePattern.includes(":")){
-                    
+          //step 1          
           let fragmentNames = 
           routePattern.split(":").map((piece)=>{return piece.split("/")[0]}).slice(1);
           
+          //step 2
            route.fragments =
            fragmentNames.reduce((fragments, fragmentName,index)=>{
               fragments[fragmentName] = args[index];
@@ -153,10 +165,9 @@ module.exports = function(UnderlyingChange,clientSideLiveData, dispatcher, model
             },{});
         }
         
-        console.log(route);
-        
-        let platform = require('./../../../config/platform').platform;
-        
+//++++++++++++++++++++++++++++ values to send to page
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+
         let props = {
           page : pageElemt,
           route : route,
@@ -174,24 +185,23 @@ module.exports = function(UnderlyingChange,clientSideLiveData, dispatcher, model
         ReactDom.render(body,document.getElementById("content"));
     }
     
-    
-    //+++++++++++++++++++++++++++++++++++ get router hashs
-    //++++++++++++++++++++++++++++++++++++++++++++++++++++
+//+++++++++++++++++++++++++++++++++++ get router hashs
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
     
     let AppRouter = Backbone.Router.extend({
       routes:routes
     });
       
-    //+++++++++++++++++++++++++++++++++++++ router contorl
-    //++++++++++++++++++++++++++++++++++++++++++++++++++++
+//+++++++++++++++++++++++++++++++++++++ router contorl
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
         
     let router = new AppRouter();
     
     Backbone.history.start({pushState: true});
     
-    //=====================================================
-    //===================================== Take over links
-    //=====================================================
+//=====================================================
+//===================================== Take over links
+//=====================================================
     
     let $ = require('jquery');
     

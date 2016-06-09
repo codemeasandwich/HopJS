@@ -10,12 +10,13 @@ var dispatcher = function(AppDB){
 //++++++++++++++++++++++++++++ load modules from logic
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+// https://webpack.github.io/docs/api-in-modules.html#require-context
   var req = require.context("../logic", true, /\.js$/);
   var fileNames = req.keys();
   
    // the 'map' load the file names from keys into the module.exports
   fileNames.map(req).forEach(function(worker,index){
-  
+
     if ("function" === typeof worker) {
       worker = new worker(AppDB);
     }

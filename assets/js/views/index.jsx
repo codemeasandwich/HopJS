@@ -1,4 +1,4 @@
-'use strict' //hh
+'use strict'
 var React = require('react');
 var UI = require('bootstrap');
 

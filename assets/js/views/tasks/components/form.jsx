@@ -2,7 +2,7 @@
 var React = require('react');
 var UI = require('bootstrap');
 
-var AddUserForm = React.createClass({
+var AddForm = React.createClass({
     displayName: 'TASK FORM',
     getInitialState :  function() {
         return {
@@ -80,7 +80,7 @@ module.exports = React.createClass({
     
         return <div>
                   <span {...this.props}/>
-                  <AddUserForm
+                  <AddForm
                     ACTION_ADD={this.props.Emit.ACTIONS.ADD.TASK}
                     Fire={this.props.Emit.Fire}
                     modelHelpers={this.props.modelHelpers}/>
