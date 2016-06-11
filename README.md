@@ -62,8 +62,8 @@ Now you can check out the server running on
 * ES6 -> ES5/4 transforms
 * Error Logging
 * Client side localisation
-* React Hot Loader
-* Live-Reload
+* [React Hot Loader](https://gaearon.github.io/react-hot-loader/)
+* [Live-Reload](https://github.com/wladiston/sails-browsersync-example)
 * JSX not watched by Nodemon
 * set code style
 * compress & hide source map for production
