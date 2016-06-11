@@ -1,6 +1,6 @@
 [![HopJS Logo](https://raw.githubusercontent.com/codemeasandwich/HopJS/master/hopjs.png)](http://hopjs.com)
 
-[![Version](https://img.shields.io/badge/HopJS-0.3.1-47AD9E.svg)](https://github.com/codemeasandwich/HopJS)
+[![Version](https://img.shields.io/badge/HopJS-0.3.2-47AD9E.svg)](https://github.com/codemeasandwich/HopJS)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
 [![build](https://api.travis-ci.org/codemeasandwich/HopJS.svg)](https://travis-ci.org/codemeasandwich/HopJS)
 [![Coverage Status](https://coveralls.io/repos/github/codemeasandwich/HopJS/badge.svg?branch=master)](https://coveralls.io/github/codemeasandwich/HopJS?branch=master)
@@ -58,6 +58,11 @@ in HopJS directory, enter the command
 Now you can check out the server running on
 
 [localhost:2020](http://localhost:2020)
+
+### testing
+```
+npm test
+```
 
 #### todo
 * unit-tests

@@ -1,6 +1,6 @@
 "use strict"
 var expect = require('chai').expect;
-var mapper = require('../assets/js/lib/modelsMapper');
+var mapper = require('../assets/js/lib/template/mapper');
 
 //=====================================================
 //============================= We will test the stores 
@@ -35,7 +35,7 @@ describe("models mapper", function() { // log the file you are working on
 	describe("waterLine 2 BackBone", function() { //log the function
 		it("using moke model", function(){
 			
-			var bbModel = mapper(mokeModel);
+			var bbModel = mapper("mokeModel",mokeModel);
 			// http://backbonejs.org/#Model-attributes
 			expect(true).to.be.true;
 			
