@@ -5,14 +5,13 @@ var UI = require('bootstrap');
 var Form = require('./components/form');
 
 module.exports = React.createClass({
-    displayName: 'example1',
+    displayName: 'New Task',
       propTypes: {
       route: React.PropTypes.object
     },
     render: function(){
         return <div>
-        <UI.Well> List of tasks </UI.Well>
-        <a href="/tasks/1"> Task A</a>
+        <UI.Well> {this.constructor.displayName} </UI.Well>
         <Form  {...this.props}/>
         </div>
     }

@@ -1,24 +1,32 @@
 'use strict'
 var React = require('react');
 var UI = require('bootstrap');
+var Backbone = require('backbone');
+
 
 var AddForm = React.createClass({
     displayName: 'TASK FORM',
     getInitialState :  function() {
         return {
-          input : { }
+          input : { },
+          saving: false
         }
     },
 
     addNewTask : function() {
+    
       this.props.Fire(this.props.ACTION_ADD, this.state.input)
-      .then(function(wasHandled){
-        console.info("Dispatcher call finished",wasHandled)
+      .then( wasHandled => {
+        console.info("Dispatcher call finished",wasHandled);
+        this.setState({ input : {}, saving : false  });
+        Backbone.history.navigate('', true);
       })
-      .catch(function(error){
-        console.error(error)
+      .catch( error => {
+        console.error(error);
+        this.setState({ saving : false });
       });
-      this.setState({ input : {} });
+      
+      this.setState({ saving : true });
     },
 
     inputChange : function(att,action){
@@ -27,14 +35,29 @@ var AddForm = React.createClass({
       this.setState({ input : inputs });
     },
     
+    makeLabel : function(att){
+      return <UI.Col componentClass={UI.ControlLabel} sm={1}>
+              {att}
+              </UI.Col>
+    },
+    makeInput : function(att,anAtt){
+      return <UI.Col sm={6}>
+              <UI.FormControl type  = { anAtt.type } 
+                            key      = { att } 
+                            value    = { this.state.input[att] } 
+                            onChange = { this.inputChange.bind(this,att) } />
+             </UI.Col>
+    },
+    
     getForm : function(attributes){
         var reactInputs = [];
         for(var att in attributes){
           var anAtt = attributes[att];
-          reactInputs.push(<div>{att}: <input type     = { anAtt.type } 
-                                              key      = { att } 
-                                              value    = { this.state.input[att] } 
-                                              onChange = { this.inputChange.bind(this,att) } /></div>)
+          reactInputs.push(<UI.FormGroup key = { att }  controlId = { att }  validationState="success">
+                              { this.makeLabel(att) }
+                              { this.makeInput(att,anAtt) }
+      <UI.FormControl.Feedback />
+                            </UI.FormGroup>)
         }
         return reactInputs;
     },
@@ -43,36 +66,23 @@ var AddForm = React.createClass({
         //console.log("this.props.modelHelpers",this.props.modelHelpers);
         var modelHelpers = this.props.modelHelpers;
         var MODEL = modelHelpers.getNames();
-        console.log("MODEL",MODEL)
+        //console.log("MODEL",MODEL)
         var attributes = modelHelpers.getModelInputs(MODEL.TASK);
         
         var isOk  = modelHelpers.checkModelInput(MODEL.TASK,this.state.input);
-        return  <form>
+        return   <UI.Form horizontal>
                     {  this.getForm(attributes) }
-                    <UI.Button bsStyle="success" disabled={ !! isOk} onClick={this.addNewTask}>Add</UI.Button>
-                 </form>
+                    <UI.Button bsStyle="success"
+                               disabled={ !! isOk || this.state.saving}
+                               onClick={this.addNewTask}>
+                               
+                        {(this.state.saving)?"saving":"Add"}
+                        
+                    </UI.Button>
+                 </UI.Form>
     }
 });
 
-var ListUsers = React.createClass({
-
-    getDefaultProps: function() {
-      return {
-        tasks: []
-      };
-    },
-
-    render: function(){
-
-        return <UI.ButtonGroup vertical>
-                   {
-                    this.props.tasks.map(function(task){
-                      return <UI.Button key={task.firstName}>{task.firstName}</UI.Button>
-                    })
-                   }
-                </UI.ButtonGroup>
-    }
-});
 
 module.exports = React.createClass({
     displayName: 'FORM PAGE',
@@ -84,7 +94,6 @@ module.exports = React.createClass({
                     ACTION_ADD={this.props.Emit.ACTIONS.ADD.TASK}
                     Fire={this.props.Emit.Fire}
                     modelHelpers={this.props.modelHelpers}/>
-                  <ListUsers users={this.props.AppDB.Task}/>
                 </div>
     }
 })
