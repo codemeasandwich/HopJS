@@ -6,9 +6,10 @@ module.exports = function (grunt) {
 		//'copy:dev',
 		//'coffee:dev',
 
+		'copy:fonts',
 		'react',
 		'webpack',
-   // 'clean:views',
+    'clean:views',
 	]);
   //grunt.log.writeln('YYYYYYYYYYY');
   //console.log("ddddddd")
