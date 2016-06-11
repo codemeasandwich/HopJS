@@ -21,10 +21,12 @@ The Client uses **Flux** built using Backbone [events](http://backbonejs.org/#Ev
 ### features
 * Client side routes with real URLs, not hash links
   * routes will automatically trailing slashes routes for completeness
+  * All page receive full address information. Brake down of, URL fragments & Query augments
 * Flux store exposes
   * Server DB Modles as backbone model
   * Moke model helps for attribute and form inputs
 * Language Extensions available in the frontend and backend
+* Automatic wiring of UI actions to business logic
 
 ## editing
 
@@ -66,7 +68,7 @@ Now you can check out the server running on
 * [Live-Reload](https://github.com/wladiston/sails-browsersync-example)
 * JSX not watched by Nodemon
 * set code style
-* compress & hide source map for production
+* compress & hide source map for Production!
 * webpack [assets CSS + FONTS](https://webpack.github.io/docs/loaders.html) [*](https://webpack.github.io/docs/using-loaders.html) [+](https://webpack.github.io/docs/list-of-loaders.html)
 
 #### random commands
