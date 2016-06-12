@@ -1,1 +1,1 @@
-nodemon --ignore 'tmp/*' --ext js . start app.js --port 2020
+nodemon --ignore 'tmp/*' --ext js . start app.js --$1 --port 2020
