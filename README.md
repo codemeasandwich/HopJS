@@ -5,9 +5,10 @@
 [![build](https://api.travis-ci.org/codemeasandwich/HopJS.svg)](https://travis-ci.org/codemeasandwich/HopJS)
 [![Coverage Status](https://coveralls.io/repos/github/codemeasandwich/HopJS/badge.svg?branch=master)](https://coveralls.io/github/codemeasandwich/HopJS?branch=master)
 
+
 Hop.js is a Full-stack Javascript framework that unify fround and backend code. The aim is to share; views, modles and controlle login for maximum code reuse.
 
-### This Frame work is build on
+### This Frame work is build on [![NodeJs](https://img.shields.io/badge/node-6.0.0-brightgreen.svg)](https://github.com/nodejs/node/blob/v6.2.1/doc/changelogs/CHANGELOG_V6.md#6.0.0) [![npm](https://img.shields.io/badge/npm-3.8.6-green.svg)](https://www.npmjs.com/) 
 
 [![Server](https://img.shields.io/badge/Sails.js-0.12.3-46AAC0.svg)](http://sailsjs.org/) 
 [![Client](https://img.shields.io/badge/Backbone-1.3.3-0071B5.svg)](http://backbonejs.org/) 
